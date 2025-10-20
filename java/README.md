@@ -67,10 +67,10 @@
   Con numeri interi, la regola diventa:
 
   $$a \times b =$$
-  $\begin{cases}
-    2a \times \dfrac{b}{2} & \text{se \(b\) è pari},\\[6pt]
-    2a \times \dfrac{b-1}{2} + a & \text{se \(b\) è dispari}.
-  \end{cases}$
+  $ \begin {cases}
+    2a \times \frac{b}{2} & \text{se \(b\) è pari},\\[6pt]
+    2a \times \frac{b-1}{2} + a & \text{se \(b\) è dispari}.
+  \end{cases}$$
 
   In pratica, si raddoppia `a` e si dimezza `b`, aggiungendo il valore corrente di `a` al risultato ogni volta che `b` è dispari.
 
