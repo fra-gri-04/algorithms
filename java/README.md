@@ -25,6 +25,7 @@ Multiplicate two numbers following this rule until `b > 0`:
 
 **Idea:**  
   $$a \times b = 2a \times \frac{b}{2}$$
+  
 With integers, the rule becomes as follows:
 
 $$2a \times \frac{b}{2} \ \ if\ b\ is\ even.$$
