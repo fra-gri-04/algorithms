@@ -1,3 +1,5 @@
+package java.src.it.fragri;
+
 /**
  * Class to test different sorting algorithms' times and efficiency.
  * @author Francesco Grillo

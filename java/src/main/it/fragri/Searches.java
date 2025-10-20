@@ -1,3 +1,5 @@
+package java.src.it.fragri;
+
 /**
  * Class to test different searching algorithms' times and efficiency of a particular element in an array of elements of the same type.
  * @author Francesco Grillo
