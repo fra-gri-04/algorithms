@@ -28,7 +28,6 @@ Multiplicate two numbers following this rule until `b > 0`:
 With integers, the rule becomes as follows:
 
 $$2a \times \frac{b}{2} \ \ if\ b\ is\ even. \\
-
 2a \times \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
 
 Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
