@@ -40,48 +40,48 @@
 
 - #### `public int repeatedAdditions(int a, int b)`
 
-  Moltiplica due numeri sommando ripetutamente `a` al risultato, `b` volte.  
+  Moltiplica due numeri sommando ripetutamente `a` al risultato, `b` volte.
 
   **Complessità:**  
-  \( T = \mathcal{O}(n) \)
+  $$T = \mathcal{O}(n)$$
 
   **Parametri:**  
   - `a`: moltiplicatore  
-  - `b`: moltiplicando  
+  - `b`: moltiplicando
 
   **Ritorna:**  
-  \( `a \times b` \)
+  $$a \times b$$
 
 ---
 
 - #### `public int russianPeasant(int a, int b)`
 
+  Moltiplica due numeri seguendo questa regola fino a quando \(b > 0\):
 
-  Moltiplica due numeri seguendo questa regola fino a quando \( `b > 0` \):  
   **Complessità:**  
-  \( T = \Theta(\log_2 b) \)
+  $$T = \Theta(\log_2 b)$$
 
   **Teoria:**  
-  \( a \times b = 2a \times \frac{1}{2}b \)
+  $$a \times b = 2a \times \frac{b}{2}$$
 
   Con numeri interi, la regola diventa:
 
-  \[
+  $$
   a \times b =
   \begin{cases}
-  2a \times \frac{b}{2} & \text{se } b \text{ è pari}, \\
-  2a \times \frac{b - 1}{2} + a & \text{se } b \text{ è dispari}
+    2a \times \dfrac{b}{2} & \text{se \(b\) è pari},\\[6pt]
+    2a \times \dfrac{b-1}{2} + a & \text{se \(b\) è dispari}.
   \end{cases}
-  \]
+  $$
 
-  In pratica, raddoppia `a` e dimezza `b`, aggiungendo il valore corrente di `a` al risultato ogni volta che `b` è dispari.
+  In pratica, si raddoppia `a` e si dimezza `b`, aggiungendo il valore corrente di `a` al risultato ogni volta che `b` è dispari.
 
   **Parametri:**  
   - `a`: moltiplicatore  
-  - `b`: moltiplicando  
+  - `b`: moltiplicando
 
   **Ritorna:**  
-  \( a \times b \)
+  $$a \times b$$
 
 ---
 
