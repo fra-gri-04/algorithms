@@ -23,7 +23,7 @@ $$a \times b$$
 #### `public int russianPeasant(int a, int b)`
 Multiplicate two numbers following this rule until `b > 0`:
 
-**Teoria:**  
+**Idea:**  
   $$a \times b = 2a \times \frac{b}{2}$$
 With integers, the rule becomes as follows:
 
