@@ -50,7 +50,7 @@
   - `b`: moltiplicando  
 
   **Ritorna:**  
-  \( a \times b \)
+  \( `a \times b` \)
 
 ---
 
