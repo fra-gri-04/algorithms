@@ -1,4 +1,4 @@
-package java.src.it.fragri;
+package it.fragri;
 
 /**
  * Class to test different multiplication algorithms' times and efficiency.
