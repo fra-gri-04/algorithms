@@ -1,15 +1,18 @@
 # Utility in java:
 ## Package it.fragri:
 ### Multiplications:
+<ul>
 #### public int repeatedAdditions(int a, int b)
 <p>
+<li>
 Multiplicate two numbers by repeatedly adding \({@literal a}\) to the result, b times.
-$$ T = O(n) $$
+$$ T = \O(n) $$
 Parameters:
 a multiplier
 b multiplicand
 return $$ a*b $$
 </p>
-
+</li>
 ### Searches:
 ### Sorting:
+</ul>
