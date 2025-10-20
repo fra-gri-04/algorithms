@@ -36,7 +36,7 @@ public class Searches{
     }
 
     /**
-     * Find the index of an element in an array of elements of the same type. Returns -1 if the element is not present.
+     * Find the index of an element in an array of elements of the same type recursively calling itself. Returns -1 if the element is not present.
      * Requires the array to be sorted. 
      * T = $\theta$(log_2(array length))
      * <p>Divides the array in half, checks if the element is the one wanted. If found, returns. If not, recursively checks in the created halves.
@@ -61,7 +61,7 @@ public class Searches{
     }
 
     /**
-     * Find the index of an element in an array of elements of the same type. Returns an insertion point to add the element to the array without breaking the order.
+     * Find the index of an element in an array of elements of the same type using iterating on the array using two indices and no recursion. Returns an insertion point to add the element to the array without breaking the order.
      * Requires the array to be sorted. 
      * T = $\theta$(log_2(array length))
      * <p>Divides the array in half, checks if the element is the one wanted. If found, returns. If not, recursively checks in the created halves.
