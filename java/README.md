@@ -1,90 +1,51 @@
-# Utility in java:
-## Package it.fragri:
-### Multiplications:
-<ul>
-    <li>
-        <h4> public int repeatedAdditions(int a, int b) </h4>
-        <p>
-            Multiplicate two numbers by repeatedly adding \({@literal a}\) to the result, b times.
-            $$ T = \O(n) $$
-            Parameters:
-            a multiplier
-            b multiplicand
-            return $$ a*b $$
-        </p>
-    </li>
-    <li>
-        <h4>public int russianPeasant(int a, int b)</h4>
-        <p>
-            Multiplicate two numbers following this rule until \({@literal b > 0}\):
-            T = $\theta$(log_2(b))
-            Theory: \({@literal a*b = 2a * \frac{1}{2}*b}\)
-            With integers, the rule becomes as follows:
-            \({@literal a*b =  \begin{cases} 2a * \frac{b}{2} \text{  if b is even}, \\ 2a * \frac{b-1}{2} + a \text{  if b is odd }\end{cases}} \)
-            Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
-            @param a multiplier
-            @param b multiplicand
-            @return product of a and b. \({@literal a*b}\)
-        </p>
-    </li>
-
-### Searches:
-### Sorting:
-</ul>
-
 # Utility in Java
 
 ## Package `it.fragri`
 
 ### Multiplications
 
-- #### `public int repeatedAdditions(int a, int b)`
+#### `public int repeatedAdditions(int a, int b)`
 
-  Moltiplica due numeri sommando ripetutamente `a` al risultato, `b` volte.
+Multiplicate two numbers by repeatedly adding `a` to the result, `b` times.
 
-  **Complessità:**  
-  $$T = \mathcal{O}(n)$$
+**Complexity:**  
+$$T = \mathcal{O}(n)$$
 
-  **Parametri:**  
-  - `a`: moltiplicatore  
-  - `b`: moltiplicando
+**Parameters:**  
+- `a`: multiplier.
+- `b`: multiplicand.
 
-  **Ritorna:**  
-  $$a \times b$$
+**Return:**  
+$$a \times b$$
 
 ---
 
-- #### `public int russianPeasant(int a, int b)`
+#### `public int russianPeasant(int a, int b)`
+Multiplicate two numbers following this rule until `b > 0`:
 
-  Moltiplica due numeri seguendo questa regola fino a quando \(b > 0\):
-
-  **Complessità:**  
-  $$T = \Theta(\log_2 b)$$
-
-  **Teoria:**  
+**Teoria:**  
   $$a \times b = 2a \times \frac{b}{2}$$
+With integers, the rule becomes as follows:
 
-  Con numeri interi, la regola diventa:
+$$2a \times \frac{b}{2} \ \ if\ b\ is\ even. \\
+2a \times \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
 
-  $$a \times b =$$
-  $$ 
-    \begin {cases}
-        2a \times \frac{b}{2} & \text{se \(b\) è pari},\\[6pt]
-        2a \times \frac{b-1}{2} + a & \text{se \(b\) è dispari}.
-    \end{cases}
-  $$
+Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
+**Complessità:**  
+$$T = \mathcal{O}(n)$$
+**Parameters:**  
+- `a`: multiplier  
+- `b`: multiplicand
 
-  In pratica, si raddoppia `a` e si dimezza `b`, aggiungendo il valore corrente di `a` al risultato ogni volta che `b` è dispari.
-
-  **Parametri:**  
-  - `a`: moltiplicatore  
-  - `b`: moltiplicando
-
-  **Ritorna:**  
-  $$a \times b$$
+**Returns:**  
+$$a \times b$$
 
 ---
+---
 
-### Searches
+### Searches:
 
-### Sorting
+---
+---
+
+### Sorting:
