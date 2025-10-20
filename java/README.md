@@ -56,8 +56,8 @@
 
 - #### `public int russianPeasant(int a, int b)`
 
-  Moltiplica due numeri seguendo questa regola fino a quando \( b > 0 \):  
 
+  Moltiplica due numeri seguendo questa regola fino a quando \( `b > 0` \):  
   **Complessità:**  
   \( T = \Theta(\log_2 b) \)
 
