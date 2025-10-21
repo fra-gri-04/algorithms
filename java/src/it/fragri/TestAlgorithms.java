@@ -2,20 +2,34 @@ package it.fragri;
 
 import java.lang.reflect.Method;
 import java.util.Scanner;
+import java.io.File;
 
-class TestAlgorithms{
-    
-    final int N_EXECUTIONS = 100;
-    final String[] MODULES = {"Multiplications","Searches","Sorting","Matrices"};
 
+class PrettyUI{
     /** * clears terminal and puts cursor to top left. */
-    public void clearTerminal(){
+    public static void clearTerminal(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
+    public static void print(String str){
+        System.err.println(str);
+    }
+}
+
+class TestAlgorithms{
+    /** Private constructor */
+    private TestAlgorithms(){}
+
+    final int N_EXECUTIONS = 100;
+
+    String[] modules;
+    String[] module_functions;
+
+
+    
     private void print_introduction(){
-        System.out.printf("# Welcome to the testing grounds!\nHere you can test the algorithms currently present in fragri's library!\nOnce you choose a function, this script will execute it %d times, generatig a corresponding random input each time.\nIn each execution, a timer starts counting after the input is generated, stopping only after the end of the function's execution end.\nThis script will then calculate the arithmetic mean of the executions time and display the result.",N_EXECUTIONS);
+        PrettyUI.print("# Welcome to the testing grounds!\nHere you can test the algorithms currently present in fragri's library!\nOnce you choose a function, this script will execute it "+N_EXECUTIONS+" times, generatig a corresponding random input each time.\nIn each execution, a timer starts counting after the input is generated,\nstopping only after the end of the function's execution end.\nThis script will then calculate the arithmetic mean of the executions time and display the result.");
     }
 
     /**
@@ -26,56 +40,93 @@ class TestAlgorithms{
      */
     private int choose_function(){
         int chose_function;
-
         try(Scanner sc = new Scanner(System.in)){
             int chose_module;
 
-            System.out.println("Which module would you like to test?");
-            // print modules names with side index.
-            for (int i=0; i<MODULES.length; i++) System.out.println(i+" - "+MODULES[i]);
+            // ------- SELECT MODULE -------- // 
+            PrettyUI.print("Which module would you like to test?");
+            cycle_modules();
 
             do { 
                 chose_module = sc.nextInt();
-                if (chose_module < 0) System.out.println("Number read smaller than 0. Type a valid module number.");
-                if (chose_module > MODULES.length) System.out.println("Number read greater than number of modules. Type a valid module number.");
-            }while (chose_module < 0 || chose_module > MODULES.length);
+                if (chose_module < 0) PrettyUI.print("Number read smaller than 0. Type a valid module number.");
+                if (chose_module > modules.length) PrettyUI.print("Number read greater than number of modules. Type a valid module number.");
+            }while (chose_module < 0 || chose_module >= modules.length);
 
-            System.out.println("Which function would you like to test?");
-            print_function_per_module(chose_module);
+            // ------- SELECT MODULE FUNCTION -------- // 
+            PrettyUI.print("Which function would you like to test?");
+            cycle_function_per_module(chose_module);
             do { 
                 chose_function = sc.nextInt();
-                chose_module = sc.nextInt();
-                if (chose_module < 0) System.out.println("Number read smaller than 0. Type a valid function number.");
-                if (chose_module > MODULES.length) System.out.println("Number read greater than number of functions. Type a valid function number.");
-            }while (chose_function < 0 || chose_function > MODULES.length);
+                // checks number input
+                if (chose_function < 0) PrettyUI.print("Number read smaller than 0. Type a valid function number.");
+                if (chose_function > module_functions.length) PrettyUI.print("Number read greater than number of functions. Type a valid function number.");
+            }while (chose_function < 0 || chose_function >= module_functions.length);
             
-            chose_function += chose_module*100;
+            chose_function += chose_module * 100;
         }
         return chose_function;
     }
 
-    // print functions relative to selected module.                         work in progress
-    private void print_function_per_module(int module){
+    /** * print functions relative to selected module. */
+    private void cycle_function_per_module(int module){
         int i=0;
         try {
-            Class<?> chose_class = Class.forName("it.fragri."+MODULES[module]);
-            Method[] metodi = chose_class.getDeclaredMethods();
-            for (Method metodo : metodi) {
-                if (java.lang.reflect.Modifier.isPublic(metodo.getModifiers())) {
-                    System.out.println(i+" - "+metodo.getName());
+            Class<?> chose_class = Class.forName("it.fragri."+modules[module]);
+            Method[] methods = chose_class.getDeclaredMethods();
+
+            // updates global variable
+            module_functions = new String[methods.length];
+
+            for (Method m : methods) {
+                if (java.lang.reflect.Modifier.isPublic(m.getModifiers())) {
+
+                    // save in the global array the functions in selected module
+                    String name = m.getName();
+                    module_functions[i] = name;
+
+                    // display module function
+                    PrettyUI.print(i+" - "+name);
+                    
                     i++;
                 }
             }
         } catch (ClassNotFoundException e) {
-            System.out.println("error\n"+e);
+            PrettyUI.print("error\n"+e);
         }
     }
+    
+    /** print modules present in the executing directory */
+    private void cycle_modules(){
+        File currentDir = new File("src/it/fragri");
+        File[] filesList = currentDir.listFiles();
+        int i = 0;
+
+        // intantiates modules array
+        modules = new String[filesList.length];
+
+        for (File file : filesList) {
+            // save in the global array the functions in selected module
+            String name = file.getName().replace(".java","");
+        
+            System.out.println(name.equals(TestAlgorithms.class.getName().replace("it.fragri", ""))+","+name+","+TestAlgorithms.class.getName());
+
+            if (name.equals(TestAlgorithms.class.getName())) continue;
+
+            modules[i] = name;
+
+            // display module function
+            PrettyUI.print(i+" - " + name);
+            i++;
+        }
+    }
+
     public void main(String[] args) {
-        clearTerminal();
+        PrettyUI.clearTerminal();
 
         print_introduction(); 
 
         int f_index = choose_function();
-        System.out.println("Hai scelto il modulo "+f_index/100+" e la funzione "+f_index%100+".");
+        PrettyUI.print("Hai scelto il modulo "+f_index/100+" e la funzione "+f_index%100+"\nEseguo funzione "+ module_functions[f_index%100] + ".");
     }
 }
