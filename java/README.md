@@ -134,6 +134,7 @@ Until the array has been fully traversed with index i, takes the i-th element an
 
 **Complexity:**  
 $$T_{best} = \mathcal{\theta}(array.length-1)$$
+
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
@@ -154,6 +155,7 @@ Greater elements end up in the end of the array, like bubbles float up to the su
 
 **Complexity:**  
 $$T_{best} = \mathcal{\theta}(array.length-1)$$
+
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
