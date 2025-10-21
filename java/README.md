@@ -129,12 +129,12 @@ Nothing.
 
 Sorts the given array.
 
-**Idea:**
+**Idea:** 
 Until the array has been fully traversed with index i, takes the i-th element and inserts it in the position in the positions less than i, which represent the ordered side of the array. 
 
 **Complexity:**  
-$$T_best = \mathcal{\theta}(array.length-1)$$
-$$T_worst = \mathcal{\theta}(array.length^2)$$
+$$T_(best) = \mathcal{\theta}(array.length-1)$$
+$$T_(worst) = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
 - `array`: list of elements.
@@ -148,13 +148,13 @@ Nothing.
 
 Sorts the given array.
 
-**Idea:**
+**Idea:** 
 Until the array has been sorted, it swaps neighbours if one is less than the other.
 Greater elements end up in the end of the array, like bubbles float up to the surface. Thanks to this observation, it does not search always until the end of the array, but until the length of the array minus the number of already checked positions.
 
 **Complexity:**  
-$$T_best = \mathcal{\theta}(array.length-1)$$
-$$T_worst = \mathcal{\theta}(array.length^2)$$
+$$T_(best) = \mathcal{\theta}(array.length-1)$$
+$$T_(worst) = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
 - `array`: list of elements.
