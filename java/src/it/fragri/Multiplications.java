@@ -6,7 +6,7 @@ package it.fragri;
  */
 public class Multiplications{
     /** private constructor to prevent initialization */
-    // private Multiplications(){}
+    private Multiplications(){}
 
 
     /**

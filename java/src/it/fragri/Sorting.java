@@ -5,6 +5,8 @@ package it.fragri;
  * @author Francesco Grillo
  */
 public class Sorting{
+    /** private constructor to prevent initialization */
+    private Sorting(){}
 
     /**
      * Sorts the given array.

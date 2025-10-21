@@ -5,6 +5,8 @@ package it.fragri;
  * @author Francesco Grillo
  */
 public class Searches{
+    /** private constructor to prevent initialization */
+    private Searches(){}
 
     /**
      * Inspect the whole array linearly and save the minimum value.
