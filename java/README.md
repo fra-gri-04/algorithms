@@ -9,6 +9,7 @@
 Multiplicate two numbers by repeatedly adding `a` to the result, `b` times.
 
 **Complexity:**  
+
 $$T = \mathcal{O}(b)$$
 
 **Parameters:**  
@@ -35,6 +36,7 @@ $$2a \times \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
 Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
 
 **Complexity:**  
+
 $$T = \mathcal{O}(b)$$
 
 **Parameters:**  
@@ -55,6 +57,7 @@ Checks element per element the whole array and stops if it founds the wanted ele
 Returns -1 if the element is not present in the array.
 
 **Complexity:**  
+
 $$T = \mathcal{\theta}(array.length)$$
 
 **Parameters:**
@@ -74,6 +77,7 @@ Find the index of an element in an array of elements of the same type recursivel
 Divides the array in half, checks if the element is the one wanted. If found, returns. If not, recursively checks in the created halves.
 
 **Complexity:**  
+
 $$T = \mathcal{\theta}(\log_2 (array.length))$$
 
 **Parameters:**
@@ -93,6 +97,7 @@ Find the index of an element in an array of elements of the same type using iter
 Divides the array in half, checks if the element is the one wanted. If found, returns. If not, updates start and end indices to check in the created halves.
 
 **Complexity:**  
+
 $$T = \mathcal{\theta}(\log_2 (array.length))$$
 
 **Parameters:**
@@ -115,6 +120,7 @@ Sorts the given array.
 Until the array has been fully traversed with index i, starting from position 0 finds the minimum value in the remaining positions and swaps the minimum with the i-th element.
 
 **Complexity:**  
+
 $$T = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
@@ -133,6 +139,7 @@ Sorts the given array.
 Until the array has been fully traversed with index i, takes the i-th element and inserts it in the position in the positions less than i, which represent the ordered side of the array. 
 
 **Complexity:**  
+
 $$T_{best} = \mathcal{\theta}(array.length-1)$$
 
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
@@ -154,6 +161,7 @@ Until the array has been sorted, it swaps neighbours if one is less than the oth
 Greater elements end up in the end of the array, like bubbles float up to the surface. Thanks to this observation, it does not search always until the end of the array, but until the length of the array minus the number of already checked positions.
 
 **Complexity:**  
+
 $$T_{best} = \mathcal{\theta}(array.length-1)$$
 
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
