@@ -23,6 +23,28 @@ public class Searches{
     }
 
     /**
+     * Inspect the array by dividing it in two halves, finding the minimums and compairing the two.
+     * It checks the halves recursively calling itself.
+     * T = $\theta$(array length)
+     * @param array list of elements
+     * @return index of the lowest element
+     */
+    public int recursiveMin(int[] array){
+        return recursive_min(array, 0, array.length);
+    }
+    private int recursive_min(int[] array, int s, int e){
+        // base cases
+        if ((e-s) == 1) return array[s];
+        if ((e-s) == 2) return array[0] < array[1] ? array[0] : array[1];
+
+        int m = (s+e)/2;
+        int min1 = recursive_min(array, s, m);
+        int min2 = recursive_min(array, m, e);
+
+        return min1 < min2 ? min1 : min2;
+    }
+
+    /**
      * Checks element per element the whole array and stops if it founds the wanted element.
      * Returns -1 if the element is not present in the array.
      * T = $\theta$(array length)
@@ -54,7 +76,7 @@ public class Searches{
         if (dx <= sx) return -1;
 
         // gets the half of the current length to be inspected.
-        int m = (dx+sx)/2 + sx;
+        int m = (dx+sx)/2;
         // checks if element is in the first or second half.
         if (array[m] == element) return m;                                  // tail recursion   (can be deleted)
         if (array[m] > element) rec_bin_search(array, element, sx, m);      // tail recursion
@@ -77,7 +99,7 @@ public class Searches{
         int m = 0;
         while (sx<dx){
             // gets the half of the current length to be inspected.
-            m = sx+ (dx-sx)/2;
+            m = (dx+sx)/2;
             // checks if element is in the first or second half.
             if (array[m] < element) sx = m+1;
             if (array[m] > element) dx = m;
@@ -85,4 +107,5 @@ public class Searches{
         }
         return -m -1;
     }
+
 }

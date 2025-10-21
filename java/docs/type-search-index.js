@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"it.fragri","l":"Multiplications"},{"p":"it.fragri","l":"Searches"},{"p":"it.fragri","l":"Sorting"}];updateSearchResults();
