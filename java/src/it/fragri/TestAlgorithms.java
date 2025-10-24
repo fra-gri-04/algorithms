@@ -1,8 +1,9 @@
 package it.fragri;
 
-import java.lang.reflect.Method;
-import java.util.Scanner;
 import java.io.File;
+import java.lang.reflect.Method;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 class PrettyUI{
@@ -13,6 +14,9 @@ class PrettyUI{
     }
 
     public static void print(String str){
+        System.err.print(str);
+    }
+    public static void println(String str){
         System.err.println(str);
     }
 }
@@ -64,8 +68,11 @@ class TestAlgorithms{
             }while (chose_function < 0 || chose_function >= module_functions.length);
             
             chose_function += chose_module * 100;
+            return chose_function;
+        }catch (InputMismatchException e){
+            PrettyUI.println("You have typed a wrong character.");
+            return -1;
         }
-        return chose_function;
     }
 
     /** * print functions relative to selected module. */
@@ -98,20 +105,22 @@ class TestAlgorithms{
     
     /** print modules present in the executing directory */
     private void cycle_modules(){
-        File currentDir = new File("src/it/fragri");
+        String path = TestAlgorithms.class.getResource("TestAlgorithms.java").getPath();
+        File currentDir = new File(path).getParentFile();
         File[] filesList = currentDir.listFiles();
+
         int i = 0;
 
         // intantiates modules array
         modules = new String[filesList.length];
 
+        String current_class_name = TestAlgorithms.class.getName().replace("it.fragri.", "");
+
         for (File file : filesList) {
             // save in the global array the functions in selected module
             String name = file.getName().replace(".java","");
-        
-            System.out.println(name.equals(TestAlgorithms.class.getName().replace("it.fragri", ""))+","+name+","+TestAlgorithms.class.getName());
 
-            if (name.equals(TestAlgorithms.class.getName())) continue;
+            if (name.equals(current_class_name)) continue;
 
             modules[i] = name;
 
@@ -126,7 +135,11 @@ class TestAlgorithms{
 
         print_introduction(); 
 
-        int f_index = choose_function();
+        /* Get function index to execute */
+        int f_index = -1;
+        while (f_index == -1)
+            f_index = choose_function();
+
         PrettyUI.print("Hai scelto il modulo "+f_index/100+" e la funzione "+f_index%100+"\nEseguo funzione "+ module_functions[f_index%100] + ".");
     }
 }
