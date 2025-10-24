@@ -23,7 +23,7 @@ class PrettyUI{
 
 class TestAlgorithms{
     /** Private constructor */
-    private TestAlgorithms(){}
+    // private TestAlgorithms(){}
 
     final int N_EXECUTIONS = 100;
 
