@@ -1,12 +1,12 @@
 package it.fragri;
 
 /**
- * Class to test different multiplication algorithms' times and efficiency.
+ * Class to test different math algorithms' times and efficiency.
  * @author Francesco Grillo
  */
-public class Multiplications{
+public class MathFunctions{
     /** private constructor to prevent initialization */
-    private Multiplications(){}
+    private MathFunctions(){}
 
 
     /**

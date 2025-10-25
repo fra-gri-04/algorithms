@@ -1,8 +1,8 @@
-# Utility in Java
+# Testing Algorithms in Java
 
 ## Package `it.fragri`
 
-### Multiplications
+### MathFunctions
 
 #### `public int repeatedAdditions(int a, int b)`
 
