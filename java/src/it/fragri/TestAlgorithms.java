@@ -13,11 +13,29 @@ class PrettyUI{
         System.out.flush();
     }
 
+    /* Pretty print Idea:
+     * 
+     * Full terminal screen cleared,
+     * ------- title ---------
+     * the dashes are one single line and they occupy the whole terminal space
+     * Input:
+     * yes or no like: Select key: [Y]es or [N]o 
+     */
+    
     public static void print(String str){
         System.err.print(str);
     }
     public static void println(String str){
         System.err.println(str);
+    }
+    public static boolean yes_or_no(String ask_str,Scanner sc){
+        System.out.print(ask_str+" (yes/no): ");
+        String answer = sc.next();
+        if (answer.equals("y") || answer.equals("yes") || answer.equals("Y") || answer.equals("YES")){
+            return true;
+        }
+        System.out.println();
+        return false;
     }
 }
 
@@ -25,14 +43,14 @@ class TestAlgorithms{
     /** Private constructor */
     // private TestAlgorithms(){}
 
-    final int N_EXECUTIONS = 100;
+    final static int N_EXECUTIONS = 100;
 
-    String[] modules;
-    String[] module_functions;
+    static String[] modules;
+    static String[] module_functions;
 
 
     
-    private void print_introduction(){
+    private static void print_introduction(){
         PrettyUI.print("# Welcome to the testing grounds!\nHere you can test the algorithms currently present in fragri's library!\nOnce you choose a function, this script will execute it "+N_EXECUTIONS+" times, generatig a corresponding random input each time.\nIn each execution, a timer starts counting after the input is generated,\nstopping only after the end of the function's execution end.\nThis script will then calculate the arithmetic mean of the executions time and display the result.");
     }
 
@@ -42,7 +60,7 @@ class TestAlgorithms{
      * Module index is on the hundreds digit, function index on the tens and ones digits.
      * example: chose_function = 105 means module 1 and function 05 has been chose.
      */
-    private int choose_function(){
+    private static int choose_function(){
         int chose_function;
         try(Scanner sc = new Scanner(System.in)){
             int chose_module;
@@ -76,7 +94,7 @@ class TestAlgorithms{
     }
 
     /** * print functions relative to selected module. */
-    private void cycle_function_per_module(int module){
+    private static void cycle_function_per_module(int module){
         int i=0;
         try {
             Class<?> chose_class = Class.forName("it.fragri."+modules[module]);
@@ -104,7 +122,7 @@ class TestAlgorithms{
     }
     
     /** print modules present in the executing directory */
-    private void cycle_modules(){
+    private static void cycle_modules(){
         String path = TestAlgorithms.class.getResource("TestAlgorithms.java").getPath();
         File currentDir = new File(path).getParentFile();
         File[] filesList = currentDir.listFiles();
@@ -130,16 +148,37 @@ class TestAlgorithms{
         }
     }
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int f_index;
+
         PrettyUI.clearTerminal();
+        
+        print_introduction();
 
-        print_introduction(); 
+        if (!PrettyUI.yes_or_no("Should we proceed?", sc)){
+            PrettyUI.println("Currently closing...");
+            return;
+        }
 
-        /* Get function index to execute */
-        int f_index = -1;
-        while (f_index == -1)
-            f_index = choose_function();
+        f_index = choose_function();
+        PrettyUI.println("Hai scelto il modulo "+f_index/100+" e la funzione "+f_index%100+"\nEseguo funzione "+ module_functions[f_index%100] + ".");
 
-        PrettyUI.print("Hai scelto il modulo "+f_index/100+" e la funzione "+f_index%100+"\nEseguo funzione "+ module_functions[f_index%100] + ".");
+        switch (module_functions[f_index]){
+            // functions that require one argument
+            case "linearMin","recursiveMin","mergeSort","selectionSort","insertionSort","bubbleSort","mergeSortUsingSpace"->{
+
+                break;
+            }
+            // functions that require two arguments
+            case "russianPeasant", "repeatedAdditions","linearSearch","binarySearch","binarySearchRecursive" -> {
+                
+                break;
+            }
+            default -> {
+                PrettyUI.println("Error. Currently closing.");
+            }
+        }
+
     }
 }
