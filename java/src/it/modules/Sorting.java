@@ -6,7 +6,7 @@ package it.modules;
  */
 public class Sorting{
     /** private constructor to prevent initialization */
-    private Sorting(){}
+    // private Sorting(){}
 
     /**
      * Sorts the given array.

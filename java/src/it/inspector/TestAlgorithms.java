@@ -110,7 +110,7 @@ class TestAlgorithms {
             // --------- SELECT MODULE ---------- //
             PrettyUI.printAsKebab(" Which module would you like to test? ");
             cycle_modules();
-                        
+
             chose_module = PrettyUI.askInt(sc);
             sc.nextLine();
 
@@ -213,7 +213,7 @@ class TestAlgorithms {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int f_index = -1;
+        int f_index;
 
         PrettyUI.clearTerminal();
 
