@@ -1,6 +1,6 @@
 # Testing Algorithms in Java
 
-## Package `it.fragri`
+## Package `it.modules`
 
 ### MathFunctions
 
