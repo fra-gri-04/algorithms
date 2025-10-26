@@ -1,4 +1,4 @@
-package it.fragri;
+package it.modules;
 
 /**
  * Class to test different searching algorithms' times and efficiency of a particular element in an array of elements of the same type.
@@ -68,7 +68,7 @@ public class Searches{
      * @param element element to find
      * @return index of the wanted element, -1 if not found.
      */
-    public int binarSearchRecursive(int[] array, int element){
+    public int binarySearchRecursive(int[] array, int element){
         return rec_bin_search(array, element, 0, array.length);
     }
     private int rec_bin_search(int[] array, int element, int sx, int dx){

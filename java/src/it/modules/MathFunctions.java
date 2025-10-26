@@ -1,4 +1,4 @@
-package it.fragri;
+package it.modules;
 
 /**
  * Class to test different math algorithms' times and efficiency.
