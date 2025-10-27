@@ -175,7 +175,7 @@ public class Matrices {
         return C;
     }
 
-    void printMatrix(int[] m, int dim){
+    static void printMatrix(int[] m, int dim){
         for (int i=0; i < dim * dim; i++){
             System.out.print(m[i]+" ");
             if (((i+1) % dim )== 0) System.out.println();
@@ -183,7 +183,7 @@ public class Matrices {
         System.out.println();
     }
 
-    void test(){
+    static void test(){
         Matrices m = new Matrices();
         int[] A = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
         
@@ -192,5 +192,7 @@ public class Matrices {
         System.out.println("Strassen multiply: ");
         printMatrix(m.strassenMatMultiply(A,A, MATRIX_DIM), MATRIX_DIM);       
     }
-
+    public static void main(String[] args) {
+        test();
+    }
 }
