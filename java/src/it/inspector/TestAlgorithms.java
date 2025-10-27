@@ -250,6 +250,11 @@ class TestAlgorithms {
 
                 break;
             }
+            // functions that require two arrays
+            case "matMultiply", "strassenMatMultiply" ->{
+                
+                break;
+            }
             default -> {
                 PrettyUI.println("Error.");
                 exit();
