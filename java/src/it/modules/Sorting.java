@@ -16,7 +16,7 @@ public class Sorting{
      * @param array list of elements.
      * 
      */
-    public void selectionSort(int[] array){
+    public static void selectionSort(int[] array){
         for (int i = 0; i < array.length-1; i++){
             // find minimum value's index in remaining array.
             int m = i;
@@ -38,7 +38,7 @@ public class Sorting{
      * @param array list of elements.
      * 
      */
-    public void insertionSort(int[] array){
+    public static void insertionSort(int[] array){
         // insert array[i] in the right position
         for (int i=1; i < array.length; i++){
             int j = i-1;
@@ -60,7 +60,7 @@ public class Sorting{
      * @param array list of elements.
      * 
      */
-    public void bubbleSort(int[] array){
+    public static void bubbleSort(int[] array){
         int end=0;
         boolean sorted;
         do { 
@@ -87,7 +87,7 @@ public class Sorting{
      * @param array list of elements.
      * 
      */
-    public void mergeSortUsingSpace(int[] array){
+    public static void mergeSortUsingSpace(int[] array){
         if (array.length > 1){
             int m = array.length/2;
             int[] B = new int[m];
@@ -95,7 +95,7 @@ public class Sorting{
             array = merge_using_space(B,C);
         }
     }
-    private int[] merge_using_space(int[] B, int[] C){
+    private static int[] merge_using_space(int[] B, int[] C){
         int iB=0, iC=0, k=0;
         // creates new array of original length
         int[] result = new int[B.length + C.length];
@@ -129,11 +129,11 @@ public class Sorting{
      * @param array list of elements.
      * 
      */
-    public void mergeSort(int[] array){
+    public static void mergeSort(int[] array){
         // temp
         merge_sort(array, 0, array.length, new int[array.length]);
     }
-    private void merge_sort(int[] array, int s, int e, int[] x){
+    private static void merge_sort(int[] array, int s, int e, int[] x){
         // checks length of current section
         if ((e-s)>1){
             int m = (e+s)/2;
@@ -146,7 +146,7 @@ public class Sorting{
             merge(array, s,m,e, x);
         }
     }
-    private void merge(int[] array, int s, int m, int e, int[] x){
+    private static void merge(int[] array, int s, int m, int e, int[] x){
         int i1 = s, i2 = m, k=0;
 
         while(i1 < m && i2 < e){

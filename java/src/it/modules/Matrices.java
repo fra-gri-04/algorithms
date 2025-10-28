@@ -25,7 +25,7 @@ public class Matrices {
      * @param B int[dim*dim] square matrix 
      * @return \({@literal C = A \times B }\)
      */
-    public int[] matMultiply(int[] A , int[] B, int dim){
+    public static int[] matMultiply(int[] A , int[] B, int dim){
         int[] C = new int[dim*dim];
         for (int i=0; i<dim; i++){
             for (int j=0; j<dim; j++){
@@ -40,7 +40,7 @@ public class Matrices {
         }
         return C;
     }
-    private int[] add(int[] A, int[] B, int dim){
+    private static int[] add(int[] A, int[] B, int dim){
         if (dim == 1)
             return new int[]{A[0] + B[0]};
         int[] C = new int[dim*dim];
@@ -49,7 +49,7 @@ public class Matrices {
                 C[i*dim + j] = A[i*dim + j] + B[i*dim + j];
         return C;
     }
-    private int[] sub(int[] A, int[] B, int dim){
+    private static int[] sub(int[] A, int[] B, int dim){
         if (dim == 1)
             return new int[]{A[0] - B[0]};
 
@@ -181,18 +181,5 @@ public class Matrices {
             if (((i+1) % dim )== 0) System.out.println();
         }
         System.out.println();
-    }
-
-    static void test(){
-        Matrices m = new Matrices();
-        int[] A = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-        
-        System.out.println("Matrix multiply: ");
-        printMatrix(m.matMultiply(A,A, MATRIX_DIM), MATRIX_DIM);       
-        System.out.println("Strassen multiply: ");
-        printMatrix(m.strassenMatMultiply(A,A, MATRIX_DIM), MATRIX_DIM);       
-    }
-    public static void main(String[] args) {
-        test();
     }
 }

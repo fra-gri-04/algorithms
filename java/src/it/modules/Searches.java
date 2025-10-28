@@ -14,7 +14,7 @@ public class Searches{
      * @param array list of elements
      * @return index of the lowest element
      */
-    public int linearMin(int[] array){
+    public static int linearMin(int[] array){
         int min = array[0];
         for (int x : array){
             if (x < min) min = x;
@@ -29,10 +29,10 @@ public class Searches{
      * @param array list of elements
      * @return index of the lowest element
      */
-    public int recursiveMin(int[] array){
+    public static int recursiveMin(int[] array){
         return recursive_min(array, 0, array.length);
     }
-    private int recursive_min(int[] array, int s, int e){
+    private static int recursive_min(int[] array, int s, int e){
         // base cases
         if ((e-s) == 1) return array[s];
         if ((e-s) == 2) return array[0] < array[1] ? array[0] : array[1];
@@ -52,7 +52,7 @@ public class Searches{
      * @param element element to find
      * @return index of the wanted element, -1 if not found.
      */
-    public int linearSearch(int[] array, int element){
+    public static int linearSearch(int[] array, int element){
         int i;
         for (i=0; i < array.length && array[i] != element; i++){}
         if (i == array.length) return -1;
@@ -68,10 +68,10 @@ public class Searches{
      * @param element element to find
      * @return index of the wanted element, -1 if not found.
      */
-    public int binarySearchRecursive(int[] array, int element){
+    public static int binarySearchRecursive(int[] array, int element){
         return rec_bin_search(array, element, 0, array.length);
     }
-    private int rec_bin_search(int[] array, int element, int sx, int dx){
+    private static int rec_bin_search(int[] array, int element, int sx, int dx){
         // if the two indeces touch, the whole array has been inspected.
         if (dx <= sx) return -1;
 
@@ -93,7 +93,7 @@ public class Searches{
      * @param element element to find
      * @return index of the wanted element, an insertion point if not found.
      */
-    public int binarySearch(int[] array, int element){
+    public static int binarySearch(int[] array, int element){
         // initialize start and end indices.
         int sx = 0, dx = array.length;
         int m = 0;

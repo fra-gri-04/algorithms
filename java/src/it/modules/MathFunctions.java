@@ -17,7 +17,7 @@ public class MathFunctions{
      * @param b multiplicand
      * @return product of a and b. \({@literal a*b}\)
      */
-    public int repeatedAdditions(int a, int b){
+    public static int repeatedAdditions(int a, int b){
         int prod = 0;
         while (b>0){
             prod += a;
@@ -37,7 +37,7 @@ public class MathFunctions{
      * @param b multiplicand
      * @return product of a and b. \({@literal a*b}\)
      */
-    public int russianPeasant(int a, int b){
+    public static int russianPeasant(int a, int b){
         int prod = 0;
         while (b>0){
             if (b%2 != 0){

@@ -1,86 +1,18 @@
 package it.inspector;
 
+import it.modules.*;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
-/* Pretty print Idea:
-* 
-* Full terminal screen cleared,
-* ------- title ---------
-* the dashes are one single line and they occupy the whole terminal space
-* Input:
-* yes or no like: Select key: [Y]es or [N]o 
-*/
-
-class PrettyUI {
-    /** * clears terminal and puts cursor to top left. */
-    public static void clearTerminal() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println("\n\n\n");
-    }
-
-    public static void printTitle() {
-        printAsKebab(" TESTING ALGORITHMS ");
-    }
-
-    private static int countDashes(String s) {
-        int terminal_length = 120;
-        return (terminal_length - s.length()) / 2;
-    }
-
-    public static void printAsKebab(String s) {
-        System.out.print("\u2500".repeat(countDashes(s)));
-        System.out.print(s);
-        System.out.print("\u2500".repeat(countDashes(s)));
-        System.out.println();
-    }
-
-    public static void print(String str) {
-        System.out.print(" ".repeat(countDashes(str)) + str);
-    }
-
-    public static void println(String str) {
-        System.out.println(" ".repeat(countDashes(str)) + str);
-    }
-
-    public static boolean yes_or_no(String ask_str, Scanner sc) {
-        System.out.print("\n" + ask_str + "\n");
-        printAsKebab(" [Y]es/[N]o ");
-
-        PrettyUI.print("");
-        String answer = sc.next();
-
-        if (answer.equals("y") || answer.equals("yes") || answer.equals("Y") || answer.equals("YES")) {
-            return true;
-        }
-        System.out.println();
-        return false;
-    }
-
-    public static int askInt(Scanner sc){
-        int number;
-        PrettyUI.print("");
-        try{
-            number = sc.nextInt();
-        }catch (InputMismatchException e){
-            PrettyUI.println("You typed a wrong character.");
-            sc.nextLine();
-            number = -1;
-        }
-        return number;
-    }
-}
 
 class TestAlgorithms {
     /** Private constructor */
     // private TestAlgorithms(){}
 
     final static int N_EXECUTIONS = 100;
+    final static int N_ELEMENTS = 100;
 
     static String[] modules = new String[] {};
     static String[] module_functions = new String[] {};
@@ -90,7 +22,8 @@ class TestAlgorithms {
         System.out.println(
                 "# Welcome to the testing grounds!\nHere you can test the algorithms currently present in fragri's library!\nOnce you choose a function, this script will execute it "
                         + N_EXECUTIONS
-                        + " times, generatig a corresponding random input each time.\nIn each execution, a timer starts counting after the input is generated,\nstopping only after the end of the function's execution end.\nThis script will then calculate the arithmetic mean of the executions time and display the result.");
+                        + " times, generatig a corresponding random input each time.\nIn each execution, a timer starts counting after the input is generated,\nstopping only after the end of the function's execution."
+                        +"\nThis script will then calculate the arithmetic mean of the executions time and display the result.");
     }
 
     /**
@@ -216,22 +149,139 @@ class TestAlgorithms {
         int f_index;
 
         PrettyUI.clearTerminal();
-
         print_introduction();
-
+        
         if (!PrettyUI.yes_or_no("Should we proceed?", sc)) {
             exit();
             return;
         }
 
+        // choose execution mode
+
         f_index = choose_function(sc);
 
-        System.out.println("Hai scelto il modulo " + f_index / 100 + " e la funzione " + f_index % 100 +
-                "\nEseguo funzione " + module_functions[f_index % 100] + ".");
+        PrettyUI.clearTerminal();
+        PrettyUI.printAsKebab(" You selected "+module_functions[f_index % 100]+" ");
+
+        // execute selected function the way you chose
+        PrettyUI.println("Would you like to manually fill the data?");
+        PrettyUI.println("(this will make the function execute only one time)");
+        boolean manualInput = PrettyUI.yes_or_no("", sc);
+        long start;
+        double duration;
+        double durations_mean = 0;
 
         switch (module_functions[f_index % 100]) {
             // sorting algorithms
             case "mergeSort", "selectionSort", "insertionSort", "bubbleSort", "mergeSortUsingSpace" -> {
+                if (manualInput){
+                    PrettyUI.println("You selected manual input.");
+                    PrettyUI.println("What lenght should the array have? ");
+                    int len = PrettyUI.askInt(sc);
+                    // input one array
+                    int[] array = GenerateRandom.array(len);
+
+                    PrettyUI.println("Generated array: ");
+                    // print array:
+                    for (int x : array) System.out.print(x+", ");
+                    System.out.println();
+
+                    switch(module_functions[f_index % 100]){
+                        case "mergeSort" -> {
+                            // sort it:
+                            start = System.nanoTime();
+                            Sorting.mergeSort(array);
+                            duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
+
+
+                            /*
+                                TO DO:
+                                currently prints out whole gen array -> truncate print
+                                print truncated sorted
+
+                                fix completion print
+                            */ 
+                            
+
+                            PrettyUI.printAsKebab(" Test Completed! ");
+                            PrettyUI.printf("It took: %.7f s. \n", duration);
+                            PrettyUI.printAsKebab("\u2500");
+                            break;
+                        }
+                        case "selectionSort" -> {
+                            
+                            break;
+                        }
+                        case "insertionSort" -> {
+                            
+                            break;
+                        }
+                        case "bubbleSort" -> {
+                            
+                            break;
+                        }
+                        case "mergeSortUsingSpace" -> {
+                            
+                            break;
+                        }
+                    }                 
+                }else{
+                    // execute N_EXECUTIONS times with random values, and then do a mean of the durations
+                    
+                    for (int i=0; i < N_EXECUTIONS; i++){
+                        int[] array = GenerateRandom.array(N_ELEMENTS);
+
+                        switch(module_functions[f_index % 100]){
+                            case "mergeSort" -> {
+                                start = System.nanoTime();
+                                Sorting.mergeSort(array);
+                                duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+
+                                durations_mean += duration;
+                                break;
+                            }
+                            case "selectionSort" -> {
+                                start = System.nanoTime();
+                                Sorting.selectionSort(array);
+                                duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+
+                                durations_mean += duration;
+                                break;
+                            }
+                            case "insertionSort" -> {
+                                start = System.nanoTime();
+                                Sorting.insertionSort(array);
+                                duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+
+                                durations_mean += duration;
+                                break;
+                            }
+                            case "bubbleSort" -> {
+                                start = System.nanoTime();
+                                Sorting.bubbleSort(array);
+                                duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+
+                                durations_mean += duration;
+                                break;
+                            }
+                            case "mergeSortUsingSpace" -> {
+                                start = System.nanoTime();
+                                Sorting.mergeSortUsingSpace(array);
+                                duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+
+                                durations_mean += duration;
+                                break;
+                            }
+                        }
+                    }
+                    durations_mean = durations_mean / N_EXECUTIONS; 
+                    // print result:
+                    PrettyUI.clearTerminal();
+                    PrettyUI.printAsKebab(" Test Completed! ");
+                    PrettyUI.println(module_functions[f_index % 100]+" was executed "+N_EXECUTIONS+" times with arrays of length "+N_ELEMENTS);
+                    PrettyUI.printf("On average, it took: %.7f s. \n", durations_mean);
+                    PrettyUI.printAsKebab("\u2500");
+                }
 
                 break;
             }
@@ -264,4 +314,9 @@ class TestAlgorithms {
     }
 }
 
-/* dash => \u2500 */
+/* 
+ * measure time
+ * long start = System.nanoTime();
+ * // function
+ * duration = (double)((System.nanoTime() - start)/1_000_000_000.0);
+ */
