@@ -134,7 +134,6 @@ public class Sorting{
      * 
      */
     public static void mergeSort(int[] array){
-        // temp
         merge_sort(array, 0, array.length, new int[array.length]);
     }
     private static void merge_sort(int[] array, int s, int e, int[] x){
@@ -166,13 +165,16 @@ public class Sorting{
 
         // if in the first half there are still elements.
         if (i1 < m){
-            System.arraycopy(array, i1, array, k, m-i1);
+            System.arraycopy(array, i1, x, k, m-i1);
         }
         // if in the second half there are still elements.
-        if (i1 < e){
-            System.arraycopy(array, i2, array, k, e-i2);
+        if (i2 < e){
+            System.arraycopy(array, i2, x, k, e-i2);
         }
-        System.arraycopy(x, 0, x, 0, array.length);
+
+        // System.arraycopy(x, 0, array, s, e-s);
+        for (int i=s; i<e; i++)
+            array[i] = x[i-s]; 
     }
 
 
@@ -192,5 +194,5 @@ public class Sorting{
         for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
         System.out.println();
     }
-    
+     
 }
