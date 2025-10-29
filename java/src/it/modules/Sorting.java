@@ -1,5 +1,7 @@
 package it.modules;
 
+import it.inspector.GenerateRandom;
+
 /**
  * Class to test different sorting algorithms' times and efficiency.
  * @author Francesco Grillo
@@ -41,12 +43,13 @@ public class Sorting{
     public static void insertionSort(int[] array){
         // insert array[i] in the right position
         for (int i=1; i < array.length; i++){
+            int k = array[i];
             int j = i-1;
-            while(j >= 0 && array[j] > array[i]){
+            while(j >= 0 && array[j] > k){
                 array[j+1] = array[j];
                 j--;
             }
-            array[j+1] = array[i];
+            array[j+1] = k;
         }
     }
 
@@ -64,17 +67,18 @@ public class Sorting{
         int end=0;
         boolean sorted;
         do { 
-            sorted = false;
+            sorted = true;
             for (int j=1; j < array.length - end; j++){
                 if (array[j] < array[j-1]){
                     // swaps array[j] with array[j-1]
                     int x = array[j];
                     array[j] = array[j-1];
                     array[j-1] = x;
+                    sorted = false;
                 }
             }
             end++;
-        } while (sorted && (end < array.length));
+        } while (!sorted && (end < array.length));
     }
 
 
@@ -170,4 +174,23 @@ public class Sorting{
         }
         System.arraycopy(x, 0, x, 0, array.length);
     }
+
+
+    public static void main(String... args){
+        GenerateRandom.MAX_GEN_INT = 100;
+        int[] array = GenerateRandom.array(30);
+        
+        System.out.println("Generated array: ");
+        // print array:
+        for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
+        System.out.println();
+        
+        mergeSort(array);
+
+        System.out.println("Sorted array: ");
+        // print array:
+        for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
+        System.out.println();
+    }
+    
 }

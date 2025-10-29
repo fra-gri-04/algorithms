@@ -11,8 +11,8 @@ class TestAlgorithms {
     /** Private constructor */
     // private TestAlgorithms(){}
 
-    final static int N_EXECUTIONS = 100;
-    final static int N_ELEMENTS = 100;
+    final static int N_EXECUTIONS = 1000;
+    final static int N_ELEMENTS = 1000;
 
     static String[] modules = new String[] {};
     static String[] module_functions = new String[] {};
@@ -144,31 +144,12 @@ class TestAlgorithms {
         PrettyUI.println("Currently closing...\n");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int f_index;
-
-        PrettyUI.clearTerminal();
-        print_introduction();
-        
-        if (!PrettyUI.yes_or_no("Should we proceed?", sc)) {
-            exit();
-            return;
-        }
-
-        // choose execution mode
-
-        f_index = choose_function(sc);
-
-        PrettyUI.clearTerminal();
-        PrettyUI.printAsKebab(" You selected "+module_functions[f_index % 100]+" ");
-
-        // execute selected function the way you chose
+    public static void execute_selected_function(int f_index, Scanner sc){
         PrettyUI.println("Would you like to manually fill the data?");
         PrettyUI.println("(this will make the function execute only one time)");
         boolean manualInput = PrettyUI.yes_or_no("", sc);
         long start;
-        double duration;
+        double duration = 0;
         double durations_mean = 0;
 
         switch (module_functions[f_index % 100]) {
@@ -183,48 +164,53 @@ class TestAlgorithms {
 
                     PrettyUI.println("Generated array: ");
                     // print array:
-                    for (int x : array) System.out.print(x+", ");
-                    System.out.println();
+                    for (int i=0; i < array.length && i < 6; i++) System.out.print(array[i]+", ");
+                    System.out.println("...");
 
+                    // sort it:
                     switch(module_functions[f_index % 100]){
                         case "mergeSort" -> {
-                            // sort it:
                             start = System.nanoTime();
                             Sorting.mergeSort(array);
                             duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
-
-
-                            /*
-                                TO DO:
-                                currently prints out whole gen array -> truncate print
-                                print truncated sorted
-
-                                fix completion print
-                            */ 
-                            
-
-                            PrettyUI.printAsKebab(" Test Completed! ");
-                            PrettyUI.printf("It took: %.7f s. \n", duration);
-                            PrettyUI.printAsKebab("\u2500");
                             break;
                         }
                         case "selectionSort" -> {
-                            
+                            start = System.nanoTime();
+                            Sorting.selectionSort(array);
+                            duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
                             break;
                         }
                         case "insertionSort" -> {
-                            
+                            start = System.nanoTime();
+                            Sorting.insertionSort(array);
+                            duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
                             break;
                         }
                         case "bubbleSort" -> {
-                            
+                            start = System.nanoTime();
+                            Sorting.bubbleSort(array);
+                            duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
                             break;
                         }
                         case "mergeSortUsingSpace" -> {
-                            
+                            start = System.nanoTime();
+                            Sorting.mergeSortUsingSpace(array);
+                            duration = (double)((System.nanoTime() - start)/1_000_000_000.0); 
+                            break;
+                        }default ->{
+                            PrettyUI.println("Error.");
+                            exit();
                             break;
                         }
-                    }                 
+                    }    
+                    // print sorted array:
+                    PrettyUI.println("Sorted array: ");
+                    for (int i=0; i < array.length && i < 6; i++) System.out.print(array[i]+", ");
+                    System.out.println("...");
+                    PrettyUI.printAsKebab(" Test Completed! ");
+                    PrettyUI.printf("It took: %.7f s. \n", duration);
+                    PrettyUI.printAsKebab("\u2500");          
                 }else{
                     // execute N_EXECUTIONS times with random values, and then do a mean of the durations
                     
@@ -271,6 +257,10 @@ class TestAlgorithms {
 
                                 durations_mean += duration;
                                 break;
+                            }default ->{
+                                PrettyUI.println("Error.");
+                                exit();
+                                break;
                             }
                         }
                     }
@@ -310,6 +300,34 @@ class TestAlgorithms {
                 exit();
             }
         }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int f_index;
+        boolean start = true;
+
+        PrettyUI.clearTerminal();
+        print_introduction();
+        
+        if (!PrettyUI.yes_or_no("Should we proceed?", sc)) {
+            exit();
+            return;
+        }
+
+        do {
+            // choose execution mode
+            f_index = choose_function(sc);
+
+            PrettyUI.clearTerminal();
+            PrettyUI.printAsKebab(" You selected "+module_functions[f_index % 100]+" ");
+
+            // execute selected function the way you chose
+            execute_selected_function(f_index, sc); 
+
+            start = PrettyUI.yes_or_no("Do you want to test another one?", sc);
+        }while(start);
 
     }
 }
