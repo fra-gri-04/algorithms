@@ -4,7 +4,7 @@
 
 ### MathFunctions
 
-#### `public int repeatedAdditions(int a, int b)`
+#### `int repeatedAdditions(int a, int b)`
 
 Multiplicate two numbers by repeatedly adding `a` to the result, `b` times.
 
@@ -21,7 +21,7 @@ $$a \times b$$
 
 ---
 
-#### `public int russianPeasant(int a, int b)`
+#### `int russianPeasant(int a, int b)`
 Multiplicate two numbers following this rule until `b > 0`:
 
 **Idea:**  
@@ -51,7 +51,7 @@ $$a \times b$$
 
 ### Searches:
 
-#### `public int linearSearch(int[] array, int element)`
+#### `int linearSearch(int[] array, int element)`
 
 Checks element per element the whole array and stops if it founds the wanted element.
 Returns -1 if the element is not present in the array.
@@ -69,7 +69,7 @@ The index of the wanted element, -1 if not found.
 
 ---   
 
-#### `public int binarSearchRecursive(int[] array, int element)`
+#### `int binarSearchRecursive(int[] array, int element)`
 
 Find the index of an element in an array of elements of the same type recursively calling itself. Returns -1 if the element is not present.
 
@@ -89,7 +89,7 @@ The index of the wanted element, -1 if not found.
 
 ---
 
-#### `public int binarySearch(int[] array, int element)`
+#### `int binarySearch(int[] array, int element)`
 
 Find the index of an element in an array of elements of the same type using iterating on the array using two indices and no recursion. If the element is not present, it returns an insertion point to add the element to the array without breaking the order.
 
@@ -112,7 +112,7 @@ The index of the wanted element, an insertion point if not found.
 
 ### Sorting:
 
-#### `public void selectionSort(int[] array)`
+#### `void selectionSort(int[] array)`
 
 Sorts the given array.
 
@@ -131,7 +131,7 @@ Nothing.
 
 ---
 
-#### `public void insertionSort(int[] array)`
+#### `void insertionSort(int[] array)`
 
 Sorts the given array.
 
@@ -152,7 +152,7 @@ Nothing.
 
 ---
 
-#### `public void bubbleSort(int[] array)`
+#### `void bubbleSort(int[] array)`
 
 Sorts the given array.
 
@@ -174,3 +174,51 @@ Nothing.
 
 ---
 
+### `int[] matMultiply(int[] A , int[] B, int dim)`
+
+**Idea:**
+
+Standard matrix multiply rows per columns for square matrices of dimension n.
+Every cell C[i,j] contains the sum of the multiplication between the i-th row and the j-th column elements such as
+
+C[i,j] = a[i,0] * b[0,j] + a[i,1] * b[1,j] + ... + a[i, N] * b[N,j]
+$$C_(ij) = a_(i0) * b_(0j) + a_(i1) * b_(1j) + \dots + a_(in) * b_(nj)$$
+
+**Complexity:**
+
+$$\mathcal{\theta}(n^3)$$
+
+
+**Parameters:**
+
+- `A` int[dim*dim] square matrix 
+- `B` int[dim*dim] square matrix 
+
+**Returns:**
+
+$$C = A \times B$$
+
+---
+
+### `int[] strassenMatMultiply(int[] A, int[] B, int dim)`
+
+**Idea:**
+
+Matrix multiply that tries to reduce complexity from $$n^3$$ to something better.
+It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate `m1, m2, $$\dots$$, m7` matrices and then recombine everything in the result matrix.
+It is explained much better [here](https://en.wikipedia.org/wiki/Strassen_algorithm "Learn the idea of the algorithm").
+
+**Complexity:**
+
+$$T = \mathcal{\theta}(n^(log_2(7))) \n T &approx; \mathcal{\theta}(n*(2.81))$$
+
+**Parameters:**
+
+- `A` int[dim*dim] square matrix 
+- `B` int[dim*dim] square matrix 
+
+**Returns:**
+
+$$C = A \times B$$
+
+---
