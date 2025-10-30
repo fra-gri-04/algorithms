@@ -209,8 +209,8 @@ $$T = \mathcal{\theta}(n^3)$$
 
 **Parameters:**
 
-- `A` square matrix $$n \times n$$ 
-- `B` square matrix $$n \times n$$ 
+- `A` square matrix $n \times n$ 
+- `B` square matrix $n \times n$ 
 
 **Returns:**
 
@@ -223,7 +223,7 @@ $$C = A \times B$$
 **Idea:**
 
 Matrix multiply rows per columns for square matrices of dimension n.
-It tries to reduce complexity from $$n^3$$ of the standard matrix multiply to something better.
+It tries to reduce complexity from $n^3$ of the standard matrix multiply to something better.
 It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate m1, m2, ... m7 matrices and then recombine everything in the result matrix.
 It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="blank" title="Learn the idea of the algorithm">here</a>.
 
@@ -238,8 +238,8 @@ $$ T = \mathcal{\theta}(n^{log_2{7}}) \simeq \mathcal{\theta}(n^{2.81})$$
 
 **Parameters:**
 
-- `A` square matrix $$n \times n$$ 
-- `B` square matrix $$n \times n$$
+- `A` square matrix $n \times n$ 
+- `B` square matrix $n \times n$
 
 **Returns:**
 
