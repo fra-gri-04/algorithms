@@ -45,10 +45,10 @@ class PrettyUI {
     }
 
     public static boolean yes_or_no(String ask_str, Scanner sc) {
-        if (ask_str != "") System.out.println("\n" + ask_str);
+        if (ask_str.equals("")) println("\n" + ask_str);
         printAsKebab(" [Y]es/[N]o ");
 
-        PrettyUI.print("");
+        print("");
         String answer = sc.next();
 
         if (answer.equals("y") || answer.equals("yes") || answer.equals("Y") || answer.equals("YES")) {
@@ -60,15 +60,38 @@ class PrettyUI {
 
     public static int askInt(Scanner sc){
         int number;
-        PrettyUI.print("");
+        print("");
         try{
             number = sc.nextInt();
         }catch (InputMismatchException e){
-            PrettyUI.println("You typed a wrong character.");
+            println("You typed a wrong character.");
             sc.nextLine();
             number = -1;
         }
         return number;
     }
+
+    public static void printArray(int[] a, String s){
+        int stop = 10;
+        print_array(a,s, stop);
+    }
+    public static void printArray(int[] a, String s, int stop){
+        print_array(a,s, stop);
+    }
+    private static void print_array(int[] a, String s, int stop){
+        if (!s.equals("")) println(s);
+        // print array:
+        int i;
+        System.out.print("[");
+        for (i=0; i < a.length && i < stop; i++) 
+            if (i < a.length -1) System.out.print(a[i]+", ");
+            else System.out.print(a[i]);
+
+        if (i < a.length) System.out.print("...");
+        
+        System.out.print("]");
+        System.out.println();
+    }
+
 }
 /* dash => \u2500 */

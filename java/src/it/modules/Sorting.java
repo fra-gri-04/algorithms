@@ -1,7 +1,5 @@
 package it.modules;
 
-import it.inspector.GenerateRandom;
-
 /**
  * Class to test different sorting algorithms' times and efficiency.
  * @author Francesco Grillo
@@ -195,24 +193,5 @@ public class Sorting{
         // System.arraycopy(x, 0, array, s, e-s);
         for (int i=s; i<e; i++)
             array[i] = x[i-s]; 
-    }
-
-
-    public static void main(String... args){
-        GenerateRandom.MAX_GEN_INT = 100;
-        int[] array = GenerateRandom.array(30);
-        
-        System.out.println("Generated array: ");
-        // print array:
-        for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
-        System.out.println();
-        
-        mergeSortUsingSpace(array);
-
-        System.out.println("Sorted array: ");
-        // print array:
-        for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
-        System.out.println();
-    }
-     
+    }     
 }

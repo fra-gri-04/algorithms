@@ -16,16 +16,14 @@
 				Z[iz] = Y[iy]
 				iy++
 			iz++
-		if ix < n-1
-			while ix < n-1
-				Z[iz] = x[ix]
-				iz++
-				ix++
-		if iy < n-1
-			while iy < n-1
-				Z[iz] = y[iy]
-				iz++
-				iy++
+		while ix < n-1
+			Z[iz] = x[ix]
+			iz++
+			ix++
+		while iy < n-1
+			Z[iz] = y[iy]
+			iz++
+			iy++
 */
 
 package main

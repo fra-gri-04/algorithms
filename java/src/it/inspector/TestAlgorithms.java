@@ -47,6 +47,8 @@ class TestAlgorithms {
             chose_module = PrettyUI.askInt(sc);
             sc.nextLine();
 
+            if (chose_module == -1) return -1;
+
             // checks number input
             if (chose_module < 0 || chose_module >= modules.length){
                 PrettyUI.println("Type a valid module number.");
@@ -63,6 +65,8 @@ class TestAlgorithms {
 
             chose_function = PrettyUI.askInt(sc);
             sc.nextLine();
+
+            if (chose_function == -1) return -2;
 
             // checks number input
             if (chose_function < 0 || chose_function >= module_functions.length){
@@ -98,6 +102,8 @@ class TestAlgorithms {
                     i++;
                 }
             }
+            System.out.println();
+            PrettyUI.println("< Cancel (-1)");
             PrettyUI.printAsKebab("");
         } catch (ClassNotFoundException e) {
             PrettyUI.print("error\n" + e);
@@ -134,6 +140,8 @@ class TestAlgorithms {
                 PrettyUI.println(i + " - " + name);
                 i++;
             }
+            System.out.println();
+            PrettyUI.println("< Cancel (-1)");
             PrettyUI.printAsKebab("");
         } catch (NoSuchElementException e) {
             PrettyUI.print("error\n" + e);
@@ -162,10 +170,7 @@ class TestAlgorithms {
                     // input one array
                     int[] array = GenerateRandom.array(len);
 
-                    PrettyUI.println("Generated array: ");
-                    // print array:
-                    for (int i=0; i < array.length && i < 6; i++) System.out.print(array[i]+", ");
-                    System.out.println("...");
+                    PrettyUI.printArray(array, "Generated Array:");
 
                     // sort it:
                     switch(module_functions[f_index % 100]){
@@ -205,9 +210,8 @@ class TestAlgorithms {
                         }
                     }    
                     // print sorted array:
-                    PrettyUI.println("Sorted array: ");
-                    for (int i=0; i < array.length && i < 6; i++) System.out.print(array[i]+", ");
-                    System.out.println("...");
+                    PrettyUI.printArray(array, "Sorted array:");
+
                     PrettyUI.printAsKebab(" Test Completed! ");
                     PrettyUI.printf("It took: %.7f s. \n", duration);
                     PrettyUI.printAsKebab("\u2500");          
@@ -308,27 +312,33 @@ class TestAlgorithms {
         int f_index;
         boolean start = true;
 
-        PrettyUI.clearTerminal();
-        print_introduction();
-        
-        if (!PrettyUI.yes_or_no("Should we proceed?", sc)) {
-            exit();
-            return;
-        }
-
-        do {
-            // choose execution mode
-            f_index = choose_function(sc);
-
+        do { 
+            
             PrettyUI.clearTerminal();
-            PrettyUI.printAsKebab(" You selected "+module_functions[f_index % 100]+" ");
-
-            // execute selected function the way you chose
-            execute_selected_function(f_index, sc); 
-
-            start = PrettyUI.yes_or_no("Do you want to test another one?", sc);
-        }while(start);
-
+            print_introduction();
+            
+            if (!PrettyUI.yes_or_no("Should we proceed?", sc)) {
+                exit();
+                return;
+            }
+            
+            do {
+                // choose execution mode
+                f_index = choose_function(sc);
+                
+                if (f_index == -1) break;           // chose to go back to introduction
+                if (f_index == -2) continue;        // chose to go back and change module
+                
+                PrettyUI.clearTerminal();
+                PrettyUI.printAsKebab(" You selected "+module_functions[f_index % 100]+" ");
+                
+                // execute selected function the way you chose
+                execute_selected_function(f_index, sc); 
+                
+                start = PrettyUI.yes_or_no("Do you want to test another one?", sc);
+            }while(start);
+            
+        } while (true);
     }
 }
 
