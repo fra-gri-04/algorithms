@@ -200,7 +200,7 @@ $$C_{ij} = a_{i0} * b_{0j} + a_{i1} * b_{1j} + \dots + a_{in} * b_{nj}$$
 The matrices are implemented in a single dimension int array `int[n*n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
-$$ M_{ij} <=> `M[i*n + j]` $$
+<p align="center">M_{ij} ⇔ `M[i $\cdot$ n + j]` </p>
 
 **Complexity:**
 
@@ -230,11 +230,13 @@ It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algo
 The matrices are implemented in a single dimension int array `int[n*n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
-$$ M_{ij} <=> `M[i*n + j]` $$
+$$ M_{ij} ⇔ `M[i*n + j]` $$
 
 **Complexity:**
 
-$$ T = \mathcal{\theta}(n^{log_2(7)}) $$
+$$ T = \mathcal{\theta}(n^{log_2{7}}) $$
+
+  ⇔
 
 $$ T &simeq; \mathcal{\theta}(n^{2.81})$$
 
