@@ -96,11 +96,20 @@ public class Sorting{
             int m = array.length/2;
             int[] B = new int[m];
             int[] C = new int[array.length - m];
-            array = merge_using_space(B,C);
+
+            System.arraycopy(array, 0, B, 0, B.length);
+            System.arraycopy(array, m, C, 0, C.length);
+            
+            mergeSortUsingSpace(B);
+            mergeSortUsingSpace(C);
+            
+            int[] x = merge_using_space(B,C);
+            System.arraycopy(x, 0, array, 0, x.length);
         }
     }
     private static int[] merge_using_space(int[] B, int[] C){
-        int iB=0, iC=0, k=0;
+        int iB=0; int iC=0; int k=0;
+
         // creates new array of original length
         int[] result = new int[B.length + C.length];
         // while one or the other sections is not finished, check which is smaller and add it to resulting array.
@@ -114,11 +123,22 @@ public class Sorting{
             }
             k++;
         }
-        // if sections have different lengths, finish by adding the remaining elements of the longer section.
+        /* // if sections have different lengths, finish by adding the remaining elements of the longer section.
         if (iB < B.length)
-            System.arraycopy(B, iB, result, k, B.length);
+            System.arraycopy(B, iB, result, k, B.length - iB);
         if (iC < C.length)
-            System.arraycopy(C, iC, result, k, C.length);
+            System.arraycopy(C, iC, result, k, C.length - iC); */
+
+        while (iB < B.length){
+            result[k] = B[iB];
+            iB++;
+            k++;
+        }
+        while (iC < C.length){
+            result[k] = C[iC];
+            iC++;
+            k++;
+        }
 
         return result;
     }
@@ -187,7 +207,7 @@ public class Sorting{
         for (int i=0; i < array.length; i++) System.out.print(array[i]+", ");
         System.out.println();
         
-        mergeSort(array);
+        mergeSortUsingSpace(array);
 
         System.out.println("Sorted array: ");
         // print array:
