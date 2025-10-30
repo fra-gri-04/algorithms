@@ -197,7 +197,7 @@ Every cell C[i,j] contains the sum of the multiplication between the i-th row an
 
 $$C_{ij} = a_{i0} * b_{0j} + a_{i1} * b_{1j} + \dots + a_{in} * b_{nj}$$
 
-The matrices are implemented in a single dimension int array `int[n*n]`.
+The matrices are implemented in a single dimension array of integers `int[n * n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
 $$ M_{ij} ⇔ M[i \cdot n +j] $$
@@ -227,7 +227,7 @@ It tries to reduce complexity from $$n^3$$ of the standard matrix multiply to so
 It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate m1, m2, ... m7 matrices and then recombine everything in the result matrix.
 It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="blank" title="Learn the idea of the algorithm">here</a>.
 
-The matrices are implemented in a single dimension int array `int[n*n]`.
+The matrices are implemented in a single dimension array of integers `int[n * n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
 $$ M_{ij} ⇔ M[i \cdot n +j] $$
