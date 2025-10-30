@@ -195,8 +195,12 @@ Nothing.
 Standard matrix multiply rows per columns for square matrices of dimension n.
 Every cell C[i,j] contains the sum of the multiplication between the i-th row and the j-th column elements such as
 
-C[i,j] = a[i,0] * b[0,j] + a[i,1] * b[1,j] + ... + a[i, N] * b[N,j]
-$$C_(ij) = a_(i0) * b_(0j) + a_(i1) * b_(1j) + \dots + a_(in) * b_(nj)$$
+$$C_{ij} = a_{i0} * b_{0j} + a_{i1} * b_{1j} + \dots + a_{in} * b_{nj}$$
+
+The matrices are implemented in a single dimension int array `int[n*n]`.
+In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
+
+$$ M_{ij} <=> `M[i*n + j]` $$
 
 **Complexity:**
 
@@ -205,8 +209,8 @@ $$T = \mathcal{\theta}(n^3)$$
 
 **Parameters:**
 
-- `A` int[dim*dim] square matrix 
-- `B` int[dim*dim] square matrix 
+- `A` square matrix $$n \times n$$ 
+- `B` square matrix $$n \times n$$ 
 
 **Returns:**
 
@@ -218,20 +222,26 @@ $$C = A \times B$$
 
 **Idea:**
 
-Matrix multiply that tries to reduce complexity from $$n^3$$ to something better.
-It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate m1, m2, $$ \dots $$, m7 matrices and then recombine everything in the result matrix.
-It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="_blank" rel="noopener noreferrer" title="Learn the idea of the algorithm">here</a>.
+Matrix multiply rows per columns for square matrices of dimension n.
+It tries to reduce complexity from $$n^3$$ of the standard matrix multiply to something better.
+It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate m1, m2, ... m7 matrices and then recombine everything in the result matrix.
+It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="blank" rel="noopener noreferrer" title="Learn the idea of the algorithm">here</a>.
+
+The matrices are implemented in a single dimension int array `int[n*n]`.
+In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
+
+$$ M_{ij} <=> `M[i*n + j]` $$
 
 **Complexity:**
 
 $$ T = \mathcal{\theta}(n^{log_2(7)}) $$
 
-$$ T &approx; \mathcal{\theta}(n^(2.81))$$
+$$ T &simeq; \mathcal{\theta}(n^{2.81})$$
 
 **Parameters:**
 
-- `A` int[dim*dim] square matrix 
-- `B` int[dim*dim] square matrix 
+- `A` square matrix $$n \times n$$ 
+- `B` square matrix $$n \times n$$
 
 **Returns:**
 
