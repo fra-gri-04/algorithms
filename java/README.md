@@ -19,7 +19,7 @@ $$T = \mathcal{O}(b)$$
 
 **Return:**  
 
-$$a \times b$$
+$$a \cdot b$$
 
 ---
 
@@ -28,13 +28,13 @@ Multiplicate two numbers following this rule until `b > 0`:
 
 **Idea:**  
 
-  $$a \times b = 2a \times \frac{b}{2}$$
+  $$a \times b = 2a \cdot \frac{b}{2}$$
   
 With integers, the rule becomes as follows:
 
-$$2a \times \frac{b}{2} \ \ if\ b\ is\ even.$$
+$$2a \cdot \frac{b}{2} \ \ if\ b\ is\ even.$$
 
-$$2a \times \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
+$$2a \cdot \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
 
 Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
 
@@ -49,7 +49,7 @@ $$T = \mathcal{O}(b)$$
 
 **Returns:**
 
-$$a \times b$$
+$$a \cdot b$$
 
 ---
 ---
@@ -200,7 +200,7 @@ $$C_{ij} = a_{i0} * b_{0j} + a_{i1} * b_{1j} + \dots + a_{in} * b_{nj}$$
 The matrices are implemented in a single dimension int array `int[n*n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
-<p align="center">M_{ij} ⇔ `M[i $\cdot$ n + j]` </p>
+$$ M_{ij} ⇔ M[i \cdot n +j] $$
 
 **Complexity:**
 
@@ -225,20 +225,16 @@ $$C = A \times B$$
 Matrix multiply rows per columns for square matrices of dimension n.
 It tries to reduce complexity from $$n^3$$ of the standard matrix multiply to something better.
 It uses the _Divide Et Impera_ concept, creating 4 matrices for each input matrix, in order to calculate m1, m2, ... m7 matrices and then recombine everything in the result matrix.
-It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="blank" rel="noopener noreferrer" title="Learn the idea of the algorithm">here</a>.
+It is explained much better <a href="https://en.wikipedia.org/wiki/Strassen_algorithm" target="blank" title="Learn the idea of the algorithm">here</a>.
 
 The matrices are implemented in a single dimension int array `int[n*n]`.
 In order to reach a position on the i-th row and on the j-th column, the array index is calculated by multiplying the rows index by the dimension of the matrix and then adding the column index.
 
-$$ M_{ij} ⇔ `M[i*n + j]` $$
+$$ M_{ij} ⇔ M[i \cdot n +j] $$
 
 **Complexity:**
 
-$$ T = \mathcal{\theta}(n^{log_2{7}}) $$
-
-  ⇔
-
-$$ T &simeq; \mathcal{\theta}(n^{2.81})$$
+$$ T = \mathcal{\theta}(n^{log_2{7}}) $$ ⇔ $$ T &simeq; \mathcal{\theta}(n^{2.81})$$
 
 **Parameters:**
 
