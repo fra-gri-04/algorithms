@@ -234,7 +234,7 @@ $$ M_{ij} ⇔ M[i \cdot n +j] $$
 
 **Complexity:**
 
-$$ T = \mathcal{\theta}(n^{log_2{7}}) &simeq; \mathcal{\theta}(n^{2.81})$$
+$$ T = \mathcal{\theta}(n^{log_2{7}}) \simeq \mathcal{\theta}(n^{2.81})$$
 
 **Parameters:**
 
