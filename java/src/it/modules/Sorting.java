@@ -1,5 +1,4 @@
 package it.modules;
-
 /**
  * Class to test different sorting algorithms' times and efficiency.
  * @author Francesco Grillo
@@ -266,7 +265,58 @@ public class Sorting{
     public static void quickSort(int[] array){
         quick_sort(array, 0, array.length);
     }
+    /**
+     * Given a max heap tree with a wrong root, fixes the structure in order to have the root as the greatest element and 
+     * each child is smaller than the father.
+     * 
+     * With i as an index of a node, 2*i+1 indicates the first son and 2*i+2 the second one.
+     * 
+     * @param array heap tree implementation
+     * @param r root value
+     * @param l last element
+     */
+    private static void fixHeap(int[] array, int r, int l){
+        int v = r;                  // examinated position
+        int x = array[v];           // position to fix
+        boolean toFix = true;
 
-    
+        do { 
+            if ((2*v + 1) >= l) toFix = false;
+            else{
+                // it takes the greatest child of v
+                int u = 2 * v +1;
+                if (array[u] < l && array[u+1] > array[u]) u=u+1;
+                
+                if (array[u] > x){
+                    // swap array
+                    int tmp = array[v];
+                    array[v] = array[u];
+                    array[u] = tmp;
+                    v = u;
+                }else 
+                    toFix = false;
+            }
+        } while (toFix);
+
+        array[v] = x;
+    }
+
+    private static void createHeap(int[] array){
+        for (int i = array.length/2; i > 0; i--){
+            fixHeap(array, i, array.length);
+        }
+    }
+
+    public static void heapSort(int[] array){
+        int tmp;
+        createHeap(array);
+
+        for (int l=array.length-1; l>1; l--){
+            tmp = array[0];
+            array[0] = array[l];
+            array[l] = tmp;
+        }
+    }
+
 
 }
