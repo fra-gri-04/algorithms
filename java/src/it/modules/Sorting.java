@@ -194,4 +194,79 @@ public class Sorting{
         for (int i=s; i<e; i++)
             array[i] = x[i-s]; 
     }     
+
+    private static int quickSort_subdivide(int[] array, int s, int e){
+        int pivot = array[s];
+        int left = s;
+        int right = e;
+        while (left < right){
+            // move to the left the right index
+            do { right--; } while (array[right] > pivot);
+
+            // move to the right the left index until it's greater than the pivot or until it has touched the right index
+            do { left++; }  while(left < right && array[left] < pivot);
+
+            if (left < right){
+                int tmp = array[right];
+                array[right] = array[left];
+                array[left] = tmp;
+            }
+        }
+        array[s] = array[right];
+        array[right] = pivot;
+        return right;
+    }
+
+    private static void quickSort_using_space(int[] array, int s, int e){
+        if ((e-s) > 1){
+            int m = quickSort_subdivide(array, s, e);
+            
+            quickSort_using_space(array, s, m);
+            quickSort_using_space(array, m+1, e);           // terminal recursion
+        }
+    }
+
+    public static void quickSortUsingSpace(int[] array){
+        quickSort_using_space(array, 0, array.length);
+    }
+
+
+    private static void quick_sort(int[] array, int s, int e){
+        // while there are elements to check
+        while((e-s) > 1){
+            int m = quickSort_subdivide(array, s, e);
+            // check which part is the shortest and apply recursion on that
+            if ((m-s) < (e-m)){
+                quick_sort(array, s, m);
+                s = m+1;
+            }else{
+                quick_sort(array, m+1, e);
+                e = m;
+            }
+        }
+    }
+
+
+    /**
+     * Sorts the array of length n using the Divide Et Impera concept.
+     * <p>Splits the array in two parts, in order to have bigger elements to the right and smaller on the left.
+     * Then sorts the two halves and puts them back together.
+     * 
+     * Best case:
+     * 
+     * T = \({@literal \theta(n * log{n})}\)
+     * 
+     * Worst case:
+     * 
+     * T = \({@literal \theta((n)^2)}\)
+     * 
+     * @param array array of ints to sort
+      */
+
+    public static void quickSort(int[] array){
+        quick_sort(array, 0, array.length);
+    }
+
+    
+
 }
