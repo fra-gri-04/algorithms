@@ -1,4 +1,5 @@
 package it.modules;
+
 /**
  * Class to test different sorting algorithms' times and efficiency.
  * @author Francesco Grillo
@@ -279,19 +280,15 @@ public class Sorting{
         int v = r;                  // examinated position
         int x = array[v];           // position to fix
         boolean toFix = true;
-
         do { 
             if ((2*v + 1) >= l) toFix = false;
             else{
                 // it takes the greatest child of v
                 int u = 2 * v +1;
-                if (array[u] < l && array[u+1] > array[u]) u=u+1;
+                if (u+1 < l && array[u+1] > array[u]) u=u+1;
                 
                 if (array[u] > x){
-                    // swap array
-                    int tmp = array[v];
                     array[v] = array[u];
-                    array[u] = tmp;
                     v = u;
                 }else 
                     toFix = false;
@@ -302,7 +299,7 @@ public class Sorting{
     }
 
     private static void createHeap(int[] array){
-        for (int i = array.length/2; i > 0; i--){
+        for (int i = array.length/2; i >= 0; i--){
             fixHeap(array, i, array.length);
         }
     }
@@ -311,12 +308,30 @@ public class Sorting{
         int tmp;
         createHeap(array);
 
-        for (int l=array.length-1; l>1; l--){
+        for (int l=array.length-1; l>0; l--){
             tmp = array[0];
             array[0] = array[l];
             array[l] = tmp;
+            fixHeap(array, 0, l);
         }
     }
-
+    /**
+     * Sorts an array without using comparisons
+     * Utilizes a helping array to save recurrencies of elements.
+     * then scroll trough it repeating the index element the found recurrencies times. 
+     * 
+     */
+    public static void integerSort(int[] array, int max){
+        int[] y = new int[max];
+        for (int a : array){
+            y[a]++;
+        }
+        int i=0, j=0;
+        while (j < y.length){
+            for (int k=0; k < y[j]; k++)
+                array[i++] = j;
+            j++;
+        }
+    }
 
 }
