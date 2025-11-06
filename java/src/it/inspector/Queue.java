@@ -114,8 +114,6 @@ public class Queue {
 
         int n = size();
 
-        System.out.println("n: "+n);
-
         for (int i = 0; i < n; i++){
             res += elements[(one+i) % elements.length]+" > ";
         }
