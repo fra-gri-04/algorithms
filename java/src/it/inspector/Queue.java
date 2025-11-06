@@ -66,7 +66,6 @@ public class Queue {
                 // resets elements array dimension
                 elements = new int[1];
             }else{
-                System.out.println("has to shrink");
                 // creates an array of half the dimension and fills it with the values
                 int[] x = new int[elements.length/2];
 
@@ -122,5 +121,4 @@ public class Queue {
         }
         return res;
     }
-
 }
