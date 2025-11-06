@@ -44,8 +44,15 @@ public class PrettyUI {
         System.out.printf(str);
     }
 
+    public static boolean yes_or_no(Scanner sc){
+        return yes_or_no("", sc);
+    }
+
     public static boolean yes_or_no(String ask_str, Scanner sc) {
-        if (ask_str.equals("")) println("\n" + ask_str);
+        if (!ask_str.isEmpty()){
+            System.out.println();
+            PrettyUI.println(ask_str);
+        } 
         printAsKebab(" [Y]es/[N]o ");
 
         print("");
@@ -100,7 +107,7 @@ public class PrettyUI {
      * @param array implementation of the binary tree
      */
     public static void printTree(int[] array){
-        int h = (int)(Math.log(array.length) / Math.log(2));
+        // int h = (int)(Math.log(array.length) / Math.log(2));
         int k=2;
         System.out.println(" ".repeat(array.length) + array[0]);
         for(int i=1; i < array.length; i++){
@@ -109,7 +116,7 @@ public class PrettyUI {
             if (i==k){
                 System.out.println();
                 k = k*2+2;
-                h--;
+                // h--;
             }
         }
         System.out.println();

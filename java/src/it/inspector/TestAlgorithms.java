@@ -86,6 +86,11 @@ class TestAlgorithms {
             Class<?> chose_class = Class.forName("it.modules." + modules[module]);
             Method[] methods = chose_class.getDeclaredMethods();
 
+            // sorts it
+            java.util.Arrays.sort(methods, (m1, m2) -> {
+                return m1.getName().compareToIgnoreCase(m2.getName());
+            });
+
             // updates global variable of module_functions
             module_functions = new String[]{};
             for (Method m : methods) {
@@ -118,6 +123,11 @@ class TestAlgorithms {
             String path = TestAlgorithms.class.getResource("").getPath().replace("inspector/", "modules/");
             File currentDir = new File(path);
             File[] filesList = currentDir.listFiles();
+            
+            // sorts it
+            java.util.Arrays.sort(filesList, (f1, f2) -> {
+                return f1.getName().compareToIgnoreCase(f2.getName());
+            });
 
             int i = 0;
 
@@ -155,7 +165,7 @@ class TestAlgorithms {
     public static void execute_selected_function(int f_index, Scanner sc){
         PrettyUI.println("Would you like to manually fill the data?");
         PrettyUI.println("(this will make the function execute only one time)");
-        boolean manualInput = PrettyUI.yes_or_no("", sc);
+        boolean manualInput = PrettyUI.yes_or_no(sc);
         long start;
         double duration = 0;
         double durations_mean = 0;
@@ -167,6 +177,9 @@ class TestAlgorithms {
                     PrettyUI.println("You selected manual input.");
                     PrettyUI.println("What lenght should the array have? ");
                     int len = PrettyUI.askInt(sc);
+
+                    PrettyUI.clearTerminal();
+
                     // input one array
                     int[] array = GenerateRandom.array(len);
 
@@ -212,6 +225,7 @@ class TestAlgorithms {
                     // print sorted array:
                     PrettyUI.printArray(array, "Sorted array:");
 
+                    // print single execution
                     PrettyUI.printAsKebab(" Test Completed! ");
                     PrettyUI.printf("It took: %.7f s. \n", duration);
                     PrettyUI.printAsKebab("\u2500");          
@@ -269,7 +283,7 @@ class TestAlgorithms {
                         }
                     }
                     durations_mean = durations_mean / N_EXECUTIONS; 
-                    // print result:
+                    // print mean of executions' duration:
                     PrettyUI.clearTerminal();
                     PrettyUI.printAsKebab(" Test Completed! ");
                     PrettyUI.println(module_functions[f_index % 100]+" was executed "+N_EXECUTIONS+" times with arrays of length "+N_ELEMENTS);
