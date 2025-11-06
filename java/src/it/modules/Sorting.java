@@ -1,4 +1,5 @@
 package it.modules;
+import it.inspector.Queue;
 
 /**
  * Class to test different sorting algorithms' times and efficiency.
@@ -317,9 +318,11 @@ public class Sorting{
     }
     /**
      * Sorts an array without using comparisons
-     * Utilizes a helping array to save recurrencies of elements.
-     * then scroll trough it repeating the index element the found recurrencies times. 
+     * Utilizes a helping array Y of length equals to the max value inside the array to sort, in order to save recurrencies of elements.
+     * then iterates trough Y and inseerts into the result the index i repeated Y[i] times. 
      * 
+     * @param array array to sort
+     * @param max max value found in the array
      */
     public static void integerSort(int[] array, int max){
         int[] y = new int[max];
@@ -333,5 +336,32 @@ public class Sorting{
             j++;
         }
     }
+
+    /**
+     * Sorts an array without using comparisons.
+     * Utilizes a helping array of buckets (queues), to save each element with the key corresponding to the index position.
+     * It then iterates trought the array of buckets and trought the queues to fill the resulting array.
+     * @param array array to sort
+     * @param b max value found in the array => number of buckets
+     */
+    public static void bucketSort(int[] array, int b){
+        Queue[] buckets = new Queue[b];
+        // initialization of helping array of buckets
+        for (int i = 0; i < b; i++)
+            buckets[i] = new Queue();
+        
+        // bucket filling
+        for (int i=0; i < array.length; i++)
+            // value of element is the bucket index
+            buckets[array[i]].enqueue(array[i]);
+
+        // Assignment of values to array
+        int j = 0;
+        for (int i=0; i < b; i++)
+            while (!buckets[i].isEmpty()){
+                array[j] = buckets[i].dequeue();
+                j++;
+            }
+    } 
 
 }
