@@ -1,52 +1,126 @@
 package it.inspector;
 
-class Node{
-    int data;
-    Node next;
-}
 /**
  * Queue implementation using two pointers: one to the start and one to the end of the queue, in order to have
  * O(1) time when in need to reach the end of the queue.
  * 
  */
 public class Queue {
-    Node one;
-    Node last;
+    private int one;
+    private int last;
+    private int[] elements;
 
-    public Queue(){
-        one = null;
-        last = null;
+    public Queue(int[] array){
+        elements = new int[array.length];
+        one = 0;
+        last = array.length;
+        System.arraycopy(array, 0, elements, 0, array.length);
     }
 
-    public void enqueue(int element){
-        Node x = new Node();
-        x.data = element;
-        x.next = null;
+    public Queue(){
+        one = 0;
+        last = 0;
+        elements = new int[1];
+    }
 
-        if (one == null){
-            one = x;
-            last = x;
-        }else{
-            last.next = x;
-            last = x;
+    public void enqueue(int e){
+        elements[last] = e;
+        last = (last + 1) % elements.length;
+        
+        if (last <= one){                               // [.,.,., L, O,.,.,.]
+            int[] x;
+            int n_elements = elements.length - one + last;
+            if (n_elements == elements.length){
+                // increase array dimension
+                x = new int[elements.length*2];
+                // takes the right side of one until the end of elements
+                System.arraycopy(elements, one, x, 0, elements.length-one);
+                // takes the left side of last until last is reached, adds up in order
+                System.arraycopy(elements, 0, x, elements.length-one, last);
+    
+                last = elements.length - one + last;
+                one = 0;
+
+                elements = x;
+            }
         }
     }
 
     public boolean isEmpty(){
-        return one == null;
+        return one == last;
     }
 
     public int first(){
-        return one.data;
+        return elements[one];
     }
 
-    public Node dequeue(){
-        Node x = one;
-        one = one.next;
-        // if the queue has only one element, last must be deleted too.
-        if (one == null)
-            last = null;
-        return x;
+    public int dequeue(){
+        int served = elements[one];
+        one = (one+1) % elements.length;
+
+        if (Math.abs(last - one) < elements.length/2){
+            // if it is empty
+            if (isEmpty()){
+                one = 0;
+                last = 0;
+                // resets elements array dimension
+                elements = new int[1];
+            }else{
+                System.out.println("has to shrink");
+                // creates an array of half the dimension and fills it with the values
+                int[] x = new int[elements.length/2];
+
+                int n = size();
+
+                for (int i = 0; i < n; i++){
+                    x[i] = elements[(one+i) % elements.length];
+                }
+                
+                elements = x; 
+                last = n;
+                one = 0;
+            }
+            
+        }
+
+        return served;
+    }
+
+    private int size(){
+        if (last < one) 
+            return elements.length + last - one;
+
+        return Math.abs(last - one);        
+    }
+
+    /**
+     * Returns a print-ready string to show the real contents of the elements array
+     * @return the contents of the underlying elements array
+     */
+    public String testString(){
+        String res = "[";
+        int i;
+        for (i=0; i<elements.length-1;i++)
+            res += elements[i] + ", ";
+        res += elements[i];
+        return res+"]\none: "+one+", last: "+last+"\n";
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+
+        if (isEmpty())
+            return "Queue is empty";
+
+        int n = size();
+
+        System.out.println("n: "+n);
+
+        for (int i = 0; i < n; i++){
+            res += elements[(one+i) % elements.length]+" > ";
+        }
+        return res;
     }
 
 }

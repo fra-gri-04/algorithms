@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Provides useful methods to print in a prettier way
 */
-class PrettyUI {
+public class PrettyUI {
     /** * clears terminal and puts cursor to top left. */
     public static void clearTerminal() {
         System.out.print("\033[H\033[2J");
@@ -93,5 +93,26 @@ class PrettyUI {
         System.out.println();
     }
 
+    /**
+     * Prints a binary tree starting from an array.
+     * It defines child of node i the node at index 2*i +1.
+     * Max height of the tree is log_2(array.length)
+     * @param array implementation of the binary tree
+     */
+    public static void printTree(int[] array){
+        int h = (int)(Math.log(array.length) / Math.log(2));
+        int k=2;
+        System.out.println(" ".repeat(array.length) + array[0]);
+        for(int i=1; i < array.length; i++){
+            int space = array.length-i;
+            System.out.print(" ".repeat(space/2)+ array[i] + " ".repeat(space/2));
+            if (i==k){
+                System.out.println();
+                k = k*2+2;
+                h--;
+            }
+        }
+        System.out.println();
+    }
 }
 /* dash => \u2500 */
