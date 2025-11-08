@@ -145,7 +145,7 @@ public class Sorting{
     /**
      * Sorts the given array. With Divide Et Impera concept.
      * <p>Splits in half the array, sorts the two halves and then merges the result, picking the minimum value from the two halves until both have been traversed.
-     * Instead of creating multiple arrays, it uses indices to indicate the start `s` and the end `e of the current section inspected, so it does not allocate any new arrays. 
+     * Instead of creating multiple arrays, it uses indices to indicate the start `s` and the end `e` of the current section inspected, so it does not allocate any new arrays. 
      * 
      * \({@literal T = \theta(array length * log_2(array length)) }\)
      * 
@@ -227,6 +227,22 @@ public class Sorting{
         }
     }
 
+
+    /**
+     * Sorts the array of length n using the Divide Et Impera concept.
+     * <p>Splits the array in two parts, in order to have bigger elements to the right and smaller on the left.
+     * Then sorts the two halves and puts them back together using recursion on both parts without checking their lengths.
+     * 
+     * Best case:
+     * 
+     * T = \({@literal \theta(n * log{n})}\)
+     * 
+     * Worst case:
+     * 
+     * T = \({@literal \theta((n)^2)}\)
+     * 
+     * @param array array of ints to sort
+      */
     public static void quickSortUsingSpace(int[] array){
         quickSort_using_space(array, 0, array.length);
     }
@@ -251,7 +267,7 @@ public class Sorting{
     /**
      * Sorts the array of length n using the Divide Et Impera concept.
      * <p>Splits the array in two parts, in order to have bigger elements to the right and smaller on the left.
-     * Then sorts the two halves and puts them back together.
+     * Then sorts the two halves and puts them back together using recursion on just the shortest part of the two.
      * 
      * Best case:
      * 
@@ -263,7 +279,6 @@ public class Sorting{
      * 
      * @param array array of ints to sort
       */
-
     public static void quickSort(int[] array){
         quick_sort(array, 0, array.length);
     }
@@ -322,16 +337,16 @@ public class Sorting{
      * then iterates trough Y and inseerts into the result the index i repeated Y[i] times. 
      * 
      * @param array array to sort
-     * @param max max value found in the array
+     * @param k max value found in the array
      */
-    public static void integerSort(int[] array, int max){
-        int[] y = new int[max];
+    public static void integerSort(int[] array, int k){
+        int[] y = new int[k];
         for (int a : array){
             y[a]++;
         }
         int i=0, j=0;
         while (j < y.length){
-            for (int k=0; k < y[j]; k++)
+            for (int v=0; v < y[j]; v++)
                 array[i++] = j;
             j++;
         }
@@ -340,7 +355,7 @@ public class Sorting{
     /**
      * Sorts an array without using comparisons.
      * Utilizes a helping array of buckets (queues), to save each element with the key corresponding to the index position.
-     * It then iterates trought the array of buckets and trought the queues to fill the resulting array.
+     * It then iterates through the array of buckets and trought the queues to fill the resulting array.
      * 
      * if b is in the order of O(n) => T = O(n)
      * if b is in the order of O(n) => T = O(n^2)
@@ -369,8 +384,6 @@ public class Sorting{
                 j++;
             }
     } 
-
-
 
     private static void bucketSort_radix(int[] array, int base, int t){
         Queue[] buckets = new Queue[base];
@@ -416,6 +429,4 @@ public class Sorting{
             max /= 10;
         } while (max / BASE != 0);
     }
-    
-    
 }

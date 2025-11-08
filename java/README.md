@@ -1,130 +1,12 @@
-# Testing Algorithms in Java
+<h1>Testing Algorithms in Java</h1>
 
-## Package `it.modules`
+# Package `it.modules`
 
-### MathFunctions
+## Sorting
 
-#### `int repeatedAdditions(int a, int b)`
+### Comparison-Based Algorithms
 
-Multiplicate two numbers by repeatedly adding `a` to the result, `b` times.
-
-**Complexity:**  
-
-$$T = \mathcal{O}(b)$$
-
-**Parameters:**  
-
-- `a`: multiplier.
-- `b`: multiplicand.
-
-**Return:**  
-
-$$a \cdot b$$
-
----
-
-#### `int russianPeasant(int a, int b)`
-Multiplicate two numbers following this rule until `b > 0`:
-
-**Idea:**  
-
-  $$a \times b = 2a \cdot \frac{b}{2}$$
-  
-With integers, the rule becomes as follows:
-
-$$2a \cdot \frac{b}{2} \ \ if\ b\ is\ even.$$
-
-$$2a \cdot \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
-
-Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
-
-**Complexity:**  
-
-$$T = \mathcal{O}(b)$$
-
-**Parameters:**  
-
-- `a`: multiplier.
-- `b`: multiplicand.
-
-**Returns:**
-
-$$a \cdot b$$
-
----
----
-
-### Searches:
-
-#### `int linearSearch(int[] array, int element)`
-
-**Idea:**
-
-Checks element per element the whole array and stops if it founds the wanted element.
-Returns -1 if the element is not present in the array.
-
-**Complexity:**  
-
-$$T = \mathcal{\theta}(array.length)$$
-
-**Parameters:**
-- `array`: list of elements.
-- `element`: element to find.
-
-**Returns**
-
-The index of the wanted element, -1 if not found.
-
----   
-
-#### `int binarSearchRecursive(int[] array, int element)`
-
-Find the index of an element in an array of elements of the same type recursively calling itself. Returns -1 if the element is not present.
-
-**Idea:**
-
-Divides the array in half, checks if the element is the one wanted. If found, returns. If not, recursively checks in the created halves.
-
-**Complexity:**  
-
-$$T = \mathcal{\theta}(\log_2 (array.length))$$
-
-**Parameters:**
-
-- `array`: list of elements.
-- `element`: element to find.
-
-**Returns**
-
-The index of the wanted element, -1 if not found.
-
----
-
-#### `int binarySearch(int[] array, int element)`
-
-Find the index of an element in an array of elements of the same type using iterating on the array using two indices and no recursion. If the element is not present, it returns an insertion point to add the element to the array without breaking the order.
-
-**Idea:**
-
-Divides the array in half, checks if the element is the one wanted. If found, returns. If not, updates start and end indices to check in the created halves.
-
-**Complexity:**  
-
-$$T = \mathcal{\theta}(\log_2 (array.length))$$
-
-**Parameters:**
-- `array`: list of elements.
-- `element`: element to find.
-
-**Returns**
-The index of the wanted element, an insertion point if not found.
-
----
----
-
-### Sorting:
-
-#### `void selectionSort(int[] array)`
+##### `void selectionSort(int[] array)`
 
 Sorts the given array.
 
@@ -159,7 +41,7 @@ $$T_{best} = \mathcal{\theta}(array.length-1)$$
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
-- `array`: list of elements.
+- `array`: list of int numbers.
 
 **Returns:**
 Nothing.
@@ -171,6 +53,7 @@ Nothing.
 Sorts the given array.
 
 **Idea:** 
+
 Until the array has been sorted, it swaps neighbours if one is less than the other.
 Greater elements end up in the end of the array, like bubbles float up to the surface. Thanks to this observation, it does not search always until the end of the array, but until the length of the array minus the number of already checked positions.
 
@@ -181,14 +64,240 @@ $$T_{best} = \mathcal{\theta}(array.length-1)$$
 $$T_{worst} = \mathcal{\theta}(array.length^2)$$
 
 **Parameters:**
-- `array`: list of elements.
+- `array`: list of int numbers.
 
 **Returns:**
 Nothing.
 
 ---
 
-#### `int[] matMultiply(int[] A , int[] B, int dim)`
+#### `void mergeSortUsingSpace(int[] array)`
+
+Sorts the given array using Divide Et Impera concept.
+
+**Idea:**
+
+Splits in half the array, creates two sections, sorts them and then merges the result, picking the minimum value from the two halves until both have been traversed.
+It uses more space than the other version by allocating as new arrays the two parts of the original.
+
+**Complexity:**
+
+With an array of length `n`:
+$$T = \mathcal{\theta}(n \cdot log(n))$$
+
+Uses $\mathcal{\theta}(n)$ of space.
+
+**Parameters:**
+- `array`: list of int numbers.
+
+**Returns:**
+Nothing.
+
+---
+
+#### `void mergeSort(int[] array)`
+
+Sorts the given array using Divide Et Impera concept.
+
+**Idea:**
+
+Splits in half the array, sorts the two halves and then merges the result, picking the minimum value from the two halves until both have been traversed.
+Instead of creating multiple arrays, it uses indices to indicate the start `s` and the end `e` of the current section inspected, so it does not need more space. 
+
+**Complexity:**
+
+With an array of length `n`:
+$$T = \mathcal{\theta}(n \cdot log(n))$$
+
+Uses $\mathcal{\theta}(n)$ of space.
+
+**Parameters:**
+- `array`: list of int numbers.
+
+**Returns:**
+Nothing.
+
+---
+
+#### `void quickSortUsingSpace(int[] array)`
+
+Sorts the given array using Divide Et Impera concept.
+
+**Idea:**
+
+Splits the array in two parts, in order to have bigger elements to the right and smaller on the left and the one in the middle.
+Then sorts the two halves and puts them back together using recursion on both parts.
+
+**Complexity:**
+
+With an array of length n:
+$$T_{best} = \mathcal{\theta(n \cdot log(n))}$$
+
+$$T_{worst} = \mathcal{\theta(n^2)}$$
+
+Uses $\mathcal{\theta}(n)$ of space.
+
+**Parameters:**
+- `array`: list of int numbers.
+
+**Returns:**
+Nothing.
+
+---
+
+#### `void quickSort(int[] array)`
+
+Sorts the given array using Divide Et Impera concept.
+
+**Idea:**
+
+Splits the array in two parts, in order to have bigger elements to the right and smaller on the left and the one in the middle.
+Then sorts the two halves and puts them back together using recursion on just the shortest part of the two.
+
+**Complexity:**
+
+With an array of length n:
+$$T_{best} = \mathcal{\theta(n \cdot log(n))}$$
+
+$$T_{worst} = \mathcal{\theta(n^2)}$$
+
+Uses $\mathcal{\theta}(n)$ of space.
+
+**Parameters:**
+- `array`: list of int numbers.
+
+**Returns:**
+Nothing.
+
+---
+
+### Non Comparison-Based Algorithms
+
+#### `void integerSort(int[] array, int k)`
+Also called countingSort, it needs to know the range of the numbers present in the array.
+Sorts the given array without using comparisons.
+
+**Idea:**
+
+Utilizes a helping array `Y` of length equals to `k`, in order to save recurrencies of elements.
+Then iterates trough `Y` and inserts into the result the index `i` repeated `Y[i]` times. 
+
+**Complexity:**
+
+With an array of length `n`:
+
+$$T = \mathcal{O(\max(n, k))}$$
+
+**Parameters:**
+- `array`: list of int numbers.
+- `k`: max value present in the array to sort.
+
+---
+
+#### `void bucketSort(int[] array, int b)`
+
+Sorts the given array without using comparisons.
+
+**Idea:**
+Utilizes a helping array of buckets (queues), to save each element with the key corresponding to the index position.
+It then iterates through the array of buckets and through the queues to fill the resulting array.
+
+**Complexity:**
+
+With an array of length `n`:
+
+$$ \text{if b is in the order of \,} \mathcal{O(n) \Rightarrow \;}  T = \mathcal{O(n)}$$
+
+$$ \text{if b is in the order of \,} \mathcal{O(n^2) \Rightarrow \;} T = \mathcal{O(n^2)}$$
+
+$$\text{in general: }T = \mathcal{O(n + b)}$$
+
+**Parameters:**
+- `array`: list of int numbers.
+- `b`: max value present in the array to sort.
+
+---
+
+Sorts the array without using comparisons.
+     * Sorts each element using only one digit of the number itself, repeating bucket sort until all digits are covered
+     * @param array
+     * @param max
+     */
+#### `void radixSort(int[] array, int max)`
+
+Sorts the given array without using comparisons.
+
+**Idea:**
+Sorts each element using only a group of digit of the number itself at a time, repeating bucket sort until all digits are covered.
+Thanks to bucket sort's stability, it can operate on just the single partitions of digits and have the array sorted.
+
+**Complexity:**
+
+With an array of length `n`:
+
+$$\mathcal{T = O(n)}$$
+
+
+**Parameters:**
+- `array`: list of int numbers.
+- `b`: max value present in the array to sort.
+
+
+---
+---
+
+## MathFunctions
+
+### `int repeatedAdditions(int a, int b)`
+
+Multiplicate two numbers by repeatedly adding `a` to the result, `b` times.
+
+**Complexity:**  
+
+$$T = \mathcal{O}(b)$$
+
+**Parameters:**  
+
+- `a`: multiplier.
+- `b`: multiplicand.
+
+**Return:**  
+
+$$a \cdot b$$
+
+---
+
+### `int russianPeasant(int a, int b)`
+Multiplicate two numbers following this rule until `b > 0`:
+
+**Idea:**  
+
+  $$a \times b = 2a \cdot \frac{b}{2}$$
+  
+With integers, the rule becomes as follows:
+
+$$2a \cdot \frac{b}{2} \ \ if\ b\ is\ even.$$
+
+$$2a \cdot \frac{b-1}{2} + a \ \ \ if\ b\ is\ odd. $$
+
+Basically it keeps doubling a and dividing by 2 b, only adding the current value of a to the result when b is odd.
+
+**Complexity:**  
+
+$$T = \mathcal{O}(b)$$
+
+**Parameters:**  
+
+- `a`: multiplier.
+- `b`: multiplicand.
+
+**Returns:**
+
+$$a \cdot b$$
+
+---
+
+### `int[] matMultiply(int[] A , int[] B, int dim)`
 
 **Idea:**
 
@@ -218,7 +327,7 @@ $$C = A \times B$$
 
 ---
 
-#### `int[] strassenMatMultiply(int[] A, int[] B, int dim)`
+### `int[] strassenMatMultiply(int[] A, int[] B, int dim)`
 
 **Idea:**
 
@@ -245,4 +354,73 @@ $$ T = \mathcal{\theta}(n^{log_2{7}}) \simeq \mathcal{\theta}(n^{2.81})$$
 
 $$C = A \times B$$
 
+---
+---
+
+## Searches:
+
+### `int linearSearch(int[] array, int element)`
+
+**Idea:**
+
+Checks element per element the whole array and stops if it founds the wanted element.
+Returns -1 if the element is not present in the array.
+
+**Complexity:**  
+
+$$T = \mathcal{\theta}(array.length)$$
+
+**Parameters:**
+- `array`: list of elements.
+- `element`: element to find.
+
+**Returns**
+
+The index of the wanted element, -1 if not found.
+
+---   
+
+### `int binarSearchRecursive(int[] array, int element)`
+
+Find the index of an element in an array of elements of the same type recursively calling itself. Returns -1 if the element is not present.
+
+**Idea:**
+
+Divides the array in half, checks if the element is the one wanted. If found, returns. If not, recursively checks in the created halves.
+
+**Complexity:**  
+
+$$T = \mathcal{\theta}(\log_2 (array.length))$$
+
+**Parameters:**
+
+- `array`: list of elements.
+- `element`: element to find.
+
+**Returns**
+
+The index of the wanted element, -1 if not found.
+
+---
+
+### `int binarySearch(int[] array, int element)`
+
+Find the index of an element in an array of elements of the same type using iterating on the array using two indices and no recursion. If the element is not present, it returns an insertion point to add the element to the array without breaking the order.
+
+**Idea:**
+
+Divides the array in half, checks if the element is the one wanted. If found, returns. If not, updates start and end indices to check in the created halves.
+
+**Complexity:**  
+
+$$T = \mathcal{\theta}(\log_2 (array.length))$$
+
+**Parameters:**
+- `array`: list of elements.
+- `element`: element to find.
+
+**Returns**
+The index of the wanted element, an insertion point if not found.
+
+---
 ---
