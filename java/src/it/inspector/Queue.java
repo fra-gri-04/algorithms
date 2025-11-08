@@ -1,9 +1,13 @@
 package it.inspector;
 
 /**
- * Queue implementation using two pointers: one to the start and one to the end of the queue, in order to have
+ * Queue implementation using an array of ints.
+ * It has two pointers: one to the start and one to the end of the queue, in order to have
  * O(1) time when in need to reach the end of the queue.
+ * It resizes itself when the array size is reached by doubling its length.
+ * When the queue is shorter than the array's length half, it shrinks.
  * 
+ * It can be initialized empty or by passing an array of integers. Using the second method will insert the elements as they are found in the array.
  */
 public class Queue {
     private int one;
