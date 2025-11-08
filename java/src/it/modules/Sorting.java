@@ -341,6 +341,12 @@ public class Sorting{
      * Sorts an array without using comparisons.
      * Utilizes a helping array of buckets (queues), to save each element with the key corresponding to the index position.
      * It then iterates trought the array of buckets and trought the queues to fill the resulting array.
+     * 
+     * if b is in the order of O(n) => T = O(n)
+     * if b is in the order of O(n) => T = O(n^2)
+     * 
+     * in general: T = O(n + b)
+     * 
      * @param array array to sort
      * @param b max value found in the array => number of buckets
      */
@@ -364,4 +370,52 @@ public class Sorting{
             }
     } 
 
+
+
+    private static void bucketSort_radix(int[] array, int base, int t){
+        Queue[] buckets = new Queue[base];
+        // initialization of helping array of buckets
+        for (int i = 0; i < base; i++)
+            buckets[i] = new Queue();
+        
+        // bucket filling
+        for (int i=0; i < array.length; i++){
+            // value of element is the t-th digit of array[i]
+            int x = array[i];
+
+            for (int k=0; k < t && x > 0; k++, x /= 10){}
+            
+            if (x >= 0)
+                buckets[x%10].enqueue(array[i]);
+        }
+
+        // Assignment of values to array
+        int j = 0;
+        for (int i=0; i < base; i++)
+            while (!buckets[i].isEmpty()){
+                array[j] = buckets[i].dequeue();
+                j++;
+            }
+    }
+
+    /**
+     * Sorts the array without using comparisons.
+     * Sorts each element using only one digit of the number itself, repeating bucket sort until all digits are covered
+     * @param array
+     * @param max
+     */
+    public static void radixSort(int[] array, int max){
+        // digit index
+        int t = 0;
+        // while there are still digits in A so that L_k / b^t != 0 
+        int BASE = 10;
+
+        do { 
+            bucketSort_radix(array, BASE, t);
+            t++;
+            max /= 10;
+        } while (max / BASE != 0);
+    }
+    
+    
 }
