@@ -1,4 +1,7 @@
-package it.inspector;
+package it.dataStructures;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Queue implementation using an array of ints.
@@ -9,7 +12,7 @@ package it.inspector;
  * 
  * It can be initialized empty or by passing an array of integers. Using the second method will insert the elements as they are found in the array.
  */
-public class Queue {
+public class Queue implements Iterable<Integer>{
     private int one;
     private int last;
     private int[] elements;
@@ -22,9 +25,9 @@ public class Queue {
     }
 
     public Queue(){
-        one = 0;
-        last = 0;
-        elements = new int[1];
+        this.one = 0;
+        this.last = 0;
+        this.elements = new int[1];
     }
 
     public void enqueue(int e){
@@ -122,5 +125,33 @@ public class Queue {
             res += elements[(one+i) % elements.length]+" > ";
         }
         return res;
+    }
+
+    @Override
+    public Iterator<Integer> iterator(){ 
+        final int[] els = new int[elements.length];
+        System.arraycopy(elements, 0, els, 0, elements.length);      
+        return new Iterator<Integer>(){
+            // immutable copies of attributes to prevent mid-iteration changes
+            private int index = 0;
+            private final int size = size();
+            
+            private final int one = Queue.this.one;
+            private final int last = Queue.this.last;
+
+            @Override
+            public boolean hasNext(){
+                if(isEmpty()) return false;
+                return index < size;
+            }
+
+            @Override
+            public Integer next(){
+                if(!hasNext()) throw new NoSuchElementException();
+                int result = els[(one + index) % els.length];
+                index++;
+                return result;
+            }
+        };
     }
 }

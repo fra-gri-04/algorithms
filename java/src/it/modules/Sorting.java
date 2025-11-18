@@ -1,5 +1,5 @@
 package it.modules;
-import it.inspector.Queue;
+import it.dataStructures.Queue;
 
 /**
  * Class to test different sorting algorithms' times and efficiency.
