@@ -137,8 +137,6 @@ public class Queue implements Iterable<Integer>{
             private final int size = size();
             
             private final int one = Queue.this.one;
-            private final int last = Queue.this.last;
-
             @Override
             public boolean hasNext(){
                 if(isEmpty()) return false;
