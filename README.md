@@ -1,12 +1,15 @@
 ﻿# Algorithms!
-Hi everyone, I will be implementing algorithms that I find somewhat interesting and upload them here.
+Hi everyone, I will be implementing algorithms and data structures that I find somewhat interesting and upload them here.
 
-The main collection will be in the [Java Repo](java/), where I'm developing a benchmarking script to test the algorithms present in the [modules folder](java/src/it/modules/).
+I'm implementing the most common algorithms, in order to test the executions' time.
+You can find them [here](fragri-library/benchmarking)
 
-Inside the [inspector folder](java/src/it/inspector/) there are classes useful for implementing the test script and my personal implementation of a queue data structure, used in some sorting algorithms.
+I'm implementing by hand useful data structures in [dataStructures](fragri-library/dataStructures)
+
+Inside the [inspector folder](fragri-library/src/it/benchmarking/inspector/) you'll find a benchmarking script to test the algorithms present in the [modules folder](fragri-library/src/it/benchmarking/modules/).
 
 It will execute a selected algorithm `n` times with random generated input (arrays will have the same lengths, but different contents).
 
-Inside the [go folder](go/) I'll upload the exercises of my computer science classes.
+Inside the [computer-science](computer-science/) folder you'll find my implementations of some execises of computer science classes, some in [java](computer-science/java/) and some in [golang](computer-science/go).
 
 ---
