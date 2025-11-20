@@ -20,4 +20,3 @@ It will execute a selected algorithm `n` times with random generated input (arra
 
 Inside the [computer-science](computer-science/) folder you'll find my implementations of some execises of computer science classes, some in [java](computer-science/java/) and some in [golang](computer-science/go).
 
----
