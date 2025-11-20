@@ -1,4 +1,4 @@
-package it.modules;
+package it.benchmarking.modules;
 
 /**
  * Class to test different searching algorithms' times and efficiency of a particular element in an array of elements of the same type.

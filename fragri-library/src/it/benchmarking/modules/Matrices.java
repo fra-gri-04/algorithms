@@ -1,4 +1,4 @@
-package it.modules;
+package it.benchmarking.modules;
 
 /**
  * Class to test different matrix algorithms' times and efficiency.

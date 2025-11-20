@@ -1,6 +1,6 @@
-package it.inspector;
+package it.benchmarking.inspector;
 
-import it.modules.*;
+import it.benchmarking.modules.*;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -83,7 +83,7 @@ class TestAlgorithms {
     private static void cycle_function_per_module(int module) {
         int i = 0;
         try {
-            Class<?> chose_class = Class.forName("it.modules." + modules[module]);
+            Class<?> chose_class = Class.forName("it.benchmarking.modules." + modules[module]);
             Method[] methods = chose_class.getDeclaredMethods();
 
             // sorts it
@@ -134,7 +134,7 @@ class TestAlgorithms {
             // initiates modules array
             modules = new String[]{};
 
-            String current_class_name = TestAlgorithms.class.getName().replace("it.modules.", "");
+            String current_class_name = TestAlgorithms.class.getName().replace("it.benchmarking.modules.", "");
 
             for (File file : filesList) {
                 // save in the global array the functions in selected module

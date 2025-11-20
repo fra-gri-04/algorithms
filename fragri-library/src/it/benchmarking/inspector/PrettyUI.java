@@ -1,4 +1,4 @@
-package it.inspector;
+package it.benchmarking.inspector;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package it.modules;
+package it.benchmarking.modules;
 import it.dataStructures.Queue;
 
 /**

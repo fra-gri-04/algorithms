@@ -1,6 +1,6 @@
 <h1>Testing Algorithms in Java</h1>
 
-# Package `it.modules`
+# Package `it.benchmarking.modules`
 
 ## Sorting
 
