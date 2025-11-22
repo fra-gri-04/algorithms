@@ -1,95 +1,80 @@
 package AstronomicalSystem;
 
 /**
- * A planet is a CelestialBody which has a velocity != 0
-  */
+ * A planet is a {@link CelestialBody} which can have a velocity != 0 and update
+ * its position.
+ */
 public class Planet extends CelestialBody {
     /*
-    * RI:
-    *
-    * AF:
-    *  
-    */
+     * RI:
+     * name must be non null
+     * 
+     * AF:
+     * the constant offset for a velocity update is VELOCITY_OFFSET
+     */
 
-    private final int velocity_offset = 1;
+    /** Value of constant offset for the change of velocity */
+    private final int VELOCITY_OFFSET = 1;
 
     /* CONSTRUCTORS */
 
     /**
-     * Constructs a planet 
+     * Constructs a planet
      * with position = 0,0,0 and velocity = 0,0,0
+     * 
      * @param name body's name
      */
-    public Planet(String name){
+    public Planet(String name) {
         super(name);
     }
+
     /**
      * Constructs a planet
      * with position = position and velocity = 0,0,0
-     * @param name body's name
+     * 
+     * @param name     body's name
      * @param position three dimensional position
      */
-    public Planet(String name, Vector3 position){
+    public Planet(String name, Vector3 position) {
         super(name, position);
     }
 
     /* METHODS */
+    /**
+     * A planet is able to move so it will add the direction * VELOCITY_OFFSET to
+     * the current velocity.
+     * Due to the fact that the gravitational attraction is constant and based upon
+     * the {@link VELOCITY_OFFSET} value,
+     * the direction is multiplied by the offset.
+     * Then the direction vector with module offset is added to the velocity.
+     */
+    @Override
+    public void updateVelocity(Vector3 direction) {
+        direction.multiply(VELOCITY_OFFSET);
+        velocity.add(direction);
+    }
 
     /**
-     * Update planet's position based on the velocity's values
+     * Update planet's position based on the velocity's values.
+     * It will add the velocity values to the position's axys.
      */
-    public void updatePosition(){
-        Vector3 velocity = velocity();
-        Vector3 position = position();
-        position.x += velocity.x;
-        position.y += velocity.y;
-        position.z += velocity.z;
+    public void updatePosition() {
+        position.add(velocity);
     }
-
-    /* Methods to update velocity: */
-
-    /** Increments velocity by the velocity_offset on the x axys. */
-    public void incVelocityX(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x + velocity_offset, v.y, v.z));
-    }
-    /** Increments velocity by the velocity_offset on the y axys. */
-    public void incVelocityY(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x, v.y + velocity_offset, v.z));
-    }
-    /** Increments velocity by the velocity_offset on the z axys. */
-    public void incVelocityZ(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x, v.y, v.z + velocity_offset));
-    }
-    /** Decrements velocity by the velocity_offset on the x axys. */
-    public void decVelocityX(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x - velocity_offset, v.y, v.z));
-    }
-    /** Decrements velocity by the velocity_offset on the y axys. */
-    public void decVelocityY(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x, v.y - velocity_offset, v.z));
-    }
-    /** Decrements velocity by the velocity_offset on the z axys. */
-    public void decVelocityZ(){
-        Vector3 v = velocity();
-        velocity(new Vector3(v.x, v.y, v.z - velocity_offset));
-    }
-    /* ---- */
 
     @Override
     public String toString() {
-        return "Planet, name: "+name()+", pos: "+position()+", vel: "+velocity();
+        return "Planet, name: " + name() + ", pos: " + position() + ", vel: " + velocity();
     }
-
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Planet other)) throw new IllegalArgumentException();
-        if (other.name() != this.name()) return false;
+        if (obj == this)
+            return true;
+        if (!(obj instanceof Planet other))
+            throw new IllegalArgumentException();
+        if (other.name() != this.name())
+            return false;
 
         return hashCode() == other.hashCode();
     }

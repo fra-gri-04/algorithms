@@ -2,9 +2,7 @@
 
 Inspiration by <a href="https://adventofcode.com/2019/day/12">https://adventofcode.com/2019/day/12</a></p>
 
-The purpose of the exercise is to design and implement a hierarchy of objects useful to represent and simulate the behavior of an <em>astronomical system</em> composed of some <em>celestial bodies</em> (such as <em>planets</em> and <em>stars</em>) subject to mutual gravitational interaction.
-You will need to decide which classes (concrete or abstract) to implement. For each of them, you will need to describe in Javadoc format the choices related to the representation of the state (with particular reference to the <em>representation invariant</em> and the <em>abstraction
-function</em>) and the methods (with particular reference to <em>pre-</em>/<em>post-conditions</em> and <em>side effects</em>).
+The purpose of the exercise is to design and implement a hierarchy of objects useful to represent and simulate the behavior of an <em>astronomical system</em> composed of some <em>celestial bodies</em> (such as <em>planets</em> and <em>stars</em>) subject to mutual simplified gravitational interaction.
 
 A <strong>celestial body</strong> is characterized by a <em>name</em> and a <em>position</em>, described by a <strong>three-dimensional point</strong> with integer coordinates; the <em>norm</em> of a three-dimensional point is the sum of the absolute values of its components
 (also known as the <span class="math inline">ℓ<sub>1</sub></span> norm). We will assume for simplicity that there are only two types of celestial bodies: <strong>stars</strong> and <strong>planets</strong>. Stars never change their position, unlike planets. Therefore, in addition to position, planets are characterized by their <em>velocity</em>, also described by a three-dimensional point. Each celestial body has an <em>energy</em> given by the product of the <em>potential energy</em>, corresponding to the norm of its position, and the <em>kinetic energy</em>, corresponding to the norm of its velocity (obviously the kinetic energy is zero in the case of fixed stars). 
@@ -27,7 +25,7 @@ An <strong>astronomical system</strong> is a collection of planets and fixed sta
 This determines the new state, consisting of the list of all celestial bodies with appropriately updated positions and velocities. The <em>total energy</em> of an astronomical system in a certain state is given by the sum of the energy of all the celestial bodies that compose it. 
 <h2 id="test-class">Test Class</h2>
 
-Complete the [AstronomicalSystemClient](AstronomicalSystemClient.java) main method so that it reads from the input stream a sequence of quintuples corresponding to the various celestial bodies; each quintuple is given by: 
+The [AstronomicalSystemClient](AstronomicalSystemClient.java) main method reads from the input stream a sequence of quintuples corresponding to the various celestial bodies; each quintuple is given by: 
 
 <ul>
       <li>a character that can be <code>S</code> or <code>P</code> to indicate, respectively, that the
@@ -40,21 +38,22 @@ These quintuples should be used to populate an astronomical system that must be 
 
 <h2 id="input">Input</h2>
 
-You can assume that the input has the specified format, that all numbers involved in the execution of the code are integers (and can be represented by variables of type <code>int</code> for position and velocity, and of type <code>long</code> for energies). Therefore, a plausible way to read the information provided in input is as follows:
+Let's assume that the input has the specified format, that all numbers involved in the execution of the code are integers (and can be represented by variables of type <code>int</code> for position and velocity, and of type <code>long</code> for energies). Therefore, a plausible way to read the information provided in input is as follows:
 
 <pre><code>
 Scanner s = new Scanner(System.in);
 while (s.hasNext()) {
-char pOrS = s.next().charAt(0); // can be P or S
-String name = s.next();
-int x = s.nextInt();
-int y = s.nextInt();
-int z = s.nextInt();
-…
+      char pOrS = s.next().charAt(0); // can be P or S
+      String name = s.next();
+      int x = s.nextInt();
+      int y = s.nextInt();
+      int z = s.nextInt();
+      …
 }
 </code></pre>
 
-<h2 id="example">Examples</h2>
+<h2>Examples</h2>
+Found also in [this](computer-science/java/AstronomicalSystem/tests) folder.
 
 Running solution 1 and having
 

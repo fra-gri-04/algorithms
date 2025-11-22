@@ -8,10 +8,10 @@ import java.util.Scanner;
  *
  * <p>For more details, see the <em>overview</em> of this package.
  */
-public class AstronomicalSystemClient {
+public abstract class AstronomicalSystemClient {
 
     /** . */
-    private AstronomicalSystemClient() {}
+    private AstronomicalSystemClient(){}
 
     /**
     * Simulates an astronomical system.
@@ -37,21 +37,18 @@ public class AstronomicalSystemClient {
                 int x = s.nextInt();
                 int y = s.nextInt();
                 int z = s.nextInt();
-                
-                CelestialBody body;
-    
-                if(pOrS == 'P')
-                    body = new Planet(name, new Vector3(x,y,z));
-                else if (pOrS == 'S')
-                    body = new Star(name, new Vector3(x,y,z));
-                else
-                    throw new IllegalArgumentException("Unknown command: "+pOrS);
-    
-                system.addBody(body);
-                System.out.println(system);
+                   
+                switch (pOrS) {
+                    case 'P', 'p' -> {
+                        system.addBody(new Planet(name, new Vector3(x,y,z)));
+                    }
+                    case 'S', 's' -> {
+                        system.addBody(new Star(name, new Vector3(x,y,z)));
+                    }
+                    default -> throw new IllegalArgumentException("Unknown command: "+pOrS);
+                }    
             }
         }
-
         /* now calculate the velocities and the positions after `timeUnits` units of time */
         for (int i = 0; i < timeUnits; i++)
             system.updateState();
