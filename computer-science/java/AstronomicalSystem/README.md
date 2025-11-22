@@ -53,7 +53,7 @@ while (s.hasNext()) {
 </code></pre>
 
 <h2>Examples</h2>
-Found also in [this](/computer-science/java/AstronomicalSystem/tests/) folder.
+Found also in [this](/tests/) folder.
 
 Running solution 1 and having
 
