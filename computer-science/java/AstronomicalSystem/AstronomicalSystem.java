@@ -94,6 +94,13 @@ public class AstronomicalSystem implements Iterable<CelestialBody> {
             total += body.energy();
         return total;
     }
+    /**
+     * 
+     * @return the collection of celestial bodies present in the system
+     */
+    public List<CelestialBody> state(){
+        return state;
+    }
 
     public Iterator<CelestialBody> iterator() {
         return Collections.unmodifiableCollection(state).iterator();

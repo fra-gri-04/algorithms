@@ -38,6 +38,11 @@ The [AstronomicalSystemClient](AstronomicalSystemClient.java) main method reads 
 
 These quintuples should be used to populate an astronomical system that must be evolved a number of steps equal to the integer indicated as a parameter on the command line. At the end of the evolution, the list of celestial bodies in the system (in alphabetical order by name and with data related to position and velocity) should be printed, and finally the total energy of the system should be printed.
 
+<h2 id="visualizer">New feature added: The visualizer!</h2>
+
+Execute [AstronomicalSystemClient](AstronomicalSystemClient.java) replacing the number of time steps with the option <code>-v</code>!
+A richer visualization of the system will take place of the original.
+
 <h2>Input</h2>
 
 Let's assume that the input has the specified format, that all numbers involved in the execution of the code are integers (and can be represented by variables of type <code>int</code> for position and velocity, and of type <code>long</code> for energies). Therefore, a plausible way to read the information provided in input is as follows:
