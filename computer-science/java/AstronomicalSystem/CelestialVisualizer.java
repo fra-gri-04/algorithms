@@ -12,8 +12,8 @@ import java.util.Objects;
 public abstract class CelestialVisualizer {
     private static int delay = 200; 
 
-    private static int X_SIZE = 31;
-    private static int Y_SIZE = 16;
+    private static int X_SIZE = 61;
+    private static int Y_SIZE = 25;
     
     public static char[][] map;
 
