@@ -108,10 +108,11 @@ public class CashBox implements Iterable<Amount> {
     @Override
     public String toString() {
         String res;
-        res = "Cashbox:\n";
+        res = "Cashbox: [\n";
 
         for (Amount amount : this)
-            res += amount + "\n";
+            res += "\t\t"+ amount + ",\n";
+        res += "\t]";
         return res.trim();
     }
 

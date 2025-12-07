@@ -33,6 +33,34 @@ public record Amount(int cents, Currency currency) implements Comparable<Amount>
     }
 
     /**
+     * Creates an amount from a string of the format:
+     * <p>
+     * <Currency Symbol><Value> like: €123.45 -> Amount(12345, Currency.Euro)
+     * @param string
+     * @return
+     */
+    public static Amount valueOf(String string){
+        char currencySymbol = string.charAt(0);
+
+        Currency currency = Currency.valueOf(currencySymbol);
+
+        string = string.substring(1);
+        
+        String[] values = string.split("\\.");
+        
+        int cents = 0;
+        if (values.length == 1)
+            cents = Integer.parseInt(string) * 100;
+        // string has decimal values
+        if (values.length > 1)
+            cents += Integer.parseInt(values[0]) * 100 + Integer.parseInt(values[1]);
+
+        return new Amount(cents, currency);
+    }
+
+    // METHODS:
+
+    /**
      * Adds the two amounts as long as they are of the same currency
      * 
      * @param amountToAdd the amount to add to this
@@ -86,6 +114,7 @@ public record Amount(int cents, Currency currency) implements Comparable<Amount>
 
         return false;
     }
+
 
     @Override
     public final int hashCode() {

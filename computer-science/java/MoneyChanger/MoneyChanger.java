@@ -118,6 +118,20 @@ public class MoneyChanger implements Iterable<ExchangeRate> {
         return cashBox;
     }
 
+
+    @Override
+    public String toString() {
+        String res = "MoneyChanger: {\n\tExchange Rates: [\n";
+        if (exchangeRates.size() == 0)
+            res += ",\n";
+        
+        for (ExchangeRate rate : this)
+            res += "\t\t"+rate.toString()+"\n";
+
+        res += "\t],\n\t"+ cashBox.toString()+"\n}";
+        return res;
+    }
+
     @Override
     public Iterator<ExchangeRate> iterator() {
         return exchangeRates.iterator();
