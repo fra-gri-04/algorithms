@@ -13,7 +13,7 @@ public record Amount(int cents, Currency currency) implements Comparable<Amount>
      * Operations between amounts are possible only with the same currency.
      * 
      * RI:
-     * 
+     * Currency is an istance of the currency enum
      * 
      */
 
@@ -50,6 +50,9 @@ public record Amount(int cents, Currency currency) implements Comparable<Amount>
      * substract the amountToSub from this amount.
      * this.cents + (-amountToSub.cents)
      * 
+     * Note that this method doesn't update this.cents, as this is a record
+     * It just returns the result.
+     * 
      * @param amountToSub amount to subtract from this.
      * @return the difference between this.cents and the other amount's cents.
      */
@@ -75,8 +78,9 @@ public record Amount(int cents, Currency currency) implements Comparable<Amount>
         if (obj == this)
             return true;
         if (obj instanceof Amount other) {
-            //System.out.println(this.cents + "," + other.cents + "-" + this.currency + "," + other.currency + "->"
-            //        + (this.cents == other.cents && this.currency == other.currency));
+            // System.out.println(this.cents + "," + other.cents + "-" + this.currency + ","
+            // + other.currency + "->"
+            // + (this.cents == other.cents && this.currency == other.currency));
             return this.cents == other.cents && this.currency == other.currency;
         }
 

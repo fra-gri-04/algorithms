@@ -21,45 +21,80 @@ public class CashBox implements Iterable<Amount> {
      * 
      */
 
+    /** Map that assigns each currency to the amount contained in the cashbox */
     private Map<Currency, Amount> amountsMap;
 
     /**
-     * Initialize amountsMap in order to have all starting amounts set to zero. 
-     * It gets the currencies from the Currency enum.
+     * Initialize amountsMap in order to have all starting amounts set to zero.
+     * <p> It gets the currencies from the {@link Currency} enum.
      * 
      */
     public CashBox() {
         // initialize map
         amountsMap = new HashMap<Currency, Amount>();
-        
-        // controllare:
-        if(Currency.values().length == 0) throw new IllegalStateException("Currency enum must be filled.");
-        
-        // fills with zeros of all the possible currencies 
+
+        // controllare
+        if (Currency.values().length == 0)
+            throw new IllegalStateException("Currency enum must be filled.");
+
+        // fills with zeros of all the possible currencies
         for (Currency currency : Currency.values())
             amountsMap.put(currency, Currency.ZERO(currency));
     }
 
     /**
-     * Deposits the amount to the current value of the same currency, updating amountsMap.
+     * Deposits the amount to the current value of the same currency, updating
+     * amountsMap.
+     * 
      * @param amount to add to this cashbox
      */
-    public void deposit(Amount amount){
-        Objects.requireNonNull(amount,"Amount must not be null.");
+    public void deposit(Amount amount) {
+        Objects.requireNonNull(amount, "Amount must not be null.");
         Amount addedAmounts = amountsMap.get(amount.currency()).add(amount);
         amountsMap.put(amount.currency(), addedAmounts);
     }
+
+    /**
+     * Withdraws an amount if the cashbox contains a greater value of the same
+     * currency.
+     * Otherwise, throws IllegalStateException
+     * 
+     * @param amount to withdraw
+     * @throws IllegalStateException if the amount is not contained in the box
+     */
+    public void withdraw(Amount amount) {
+        // compare the amounts of the same currency:
+        Amount inside = amountsMap.get(amount.currency());
+
+        // if what is contained is less than the amount to withdraw 
+        if (inside.compareTo(amount) < 0)
+            throw new IllegalStateException("The amount requested to withdraw is not contained in the cashbox.");
+
+        amountsMap.put(amount.currency(), inside.sub(amount));
+    }
+
     /**
      * Getter for the map of <Currency, Amount>
-     * @return
+     * 
+     * @return the map of amounts contained in the cashbox
      */
-    public Map<Currency, Amount> amountsMap(){
+    public Map<Currency, Amount> amountsMap() {
         return Map.copyOf(amountsMap);
+    }
+
+    /**
+     * Gives how much of a currency is present in the cashbox
+     * @param currency to check
+     * @return the amount present in the cashBox
+     */
+    public Amount howMuch(Currency currency){
+        return amountsMap.get(currency);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
+        if (obj == this)
+            return true;
         if (obj instanceof CashBox other)
             return amountsMap.equals(other.amountsMap());
         return false;
@@ -76,7 +111,7 @@ public class CashBox implements Iterable<Amount> {
         res = "Cashbox:\n";
 
         for (Amount amount : this)
-            res += amount+"\n";
+            res += amount + "\n";
         return res.trim();
     }
 
@@ -91,13 +126,14 @@ public class CashBox implements Iterable<Amount> {
 
             @Override
             public boolean hasNext() {
-                while(index < stop && amounts.get(currencies[index]).cents() == 0)
+                while (index < stop && amounts.get(currencies[index]).cents() == 0)
                     index++;
                 return index < stop;
             }
+
             @Override
             public Amount next() {
-                if (hasNext()){
+                if (hasNext()) {
                     Amount next = amounts.get(currencies[index]);
                     index++;
                     return next;
